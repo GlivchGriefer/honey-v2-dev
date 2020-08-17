@@ -1,4 +1,7 @@
 # COMMAND HANDLER CLASS
+from bot import ch
+
+
 class CommandHandler:
 
     # ON CREATION, RECORD CLIENT VARIABLE
