@@ -6,7 +6,7 @@ from Commands.CommandHandler import CommandHandler
 
 
 # VARIABLES
-client = discord.client()
+client = discord.client
 bot = commands.Bot(command_prefix='-')
 ch = CommandHandler(bot)
 
