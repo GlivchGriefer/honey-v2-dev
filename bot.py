@@ -16,7 +16,7 @@ async def on_ready():
         print(bot.user.name)
         print(bot.user.id)
         print('Discord.py Version: {}'.format(discord.__version__))
-        print('All systems nominal.')
+        print('All systems nominal....')
 
     except Exception as e:
         print(e)
