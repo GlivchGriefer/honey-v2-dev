@@ -6,6 +6,8 @@ from Commands.CommandHandler import CommandHandler
 
 
 # VARIABLES
+from Commands.HelloCommand import hello_function
+
 bot = Bot(command_prefix='-')
 ch = CommandHandler(bot)
 
@@ -44,5 +46,24 @@ async def on_message(message):
         except Exception as e:
             print(e)
 
+# ADD COMMANDS ---------------------------------------------------------------------------------------------------------
+# HELLO
+ch.add_command({
+    # IF MESSAGE STARTS WITH TRIGGER
+    'trigger': '-hello',
+
+    # CALL MAIN FUNCTION
+    'function': hello_function,
+
+    # NUMBER OF ARGUMENTS NEEDED
+    'args_num': 1,
+
+    # NAME OF THE ARGUMENT
+    'args_name': ['string'],
+
+    # DESCRIBE WHAT FUNCTION DOES
+    'description': 'Will respond hello to the caller and show arg 1'
+})
+# ADD COMMANDS ---------------------------------------------------------------------------------------------------------
 
 bot.run(os.environ["BOT_TOKEN"])
