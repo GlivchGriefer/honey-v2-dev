@@ -1,14 +1,14 @@
 # IMPORTS
 import os
 import discord
-from discord.ext.commands import Bot
+from discord.ext import commands
 from Commands.CommandHandler import CommandHandler
 
 
 # VARIABLES
 from Commands.HelloCommand import hello_function
 
-bot = Bot(command_prefix='-')
+bot = commands.Bot(command_prefix='-')
 ch = CommandHandler(bot)
 
 
@@ -50,13 +50,13 @@ async def on_message(message):
 # HELLO
 ch.add_command({
     # IF MESSAGE STARTS WITH TRIGGER
-    'trigger': '-hello',
+    'trigger': 'hello',
 
     # CALL MAIN FUNCTION
     'function': hello_function,
 
     # NUMBER OF ARGUMENTS NEEDED
-    'args_num': 1,
+    'args_num': 0,
 
     # NAME OF THE ARGUMENT
     'args_name': ['string'],
