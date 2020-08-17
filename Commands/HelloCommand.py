@@ -13,7 +13,7 @@ def hello_function(message, client, args):
 # ADD COMMAND | DICTIONARY
 ch.add_command({
     # IF MESSAGE STARTS WITH TRIGGER
-    'trigger': '!hello',
+    'trigger': '-hello',
 
     # CALL MAIN FUNCTION
     'function': hello_function,
