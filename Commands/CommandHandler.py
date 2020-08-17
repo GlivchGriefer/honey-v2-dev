@@ -1,7 +1,4 @@
 # COMMAND HANDLER CLASS
-from bot import ch
-
-
 class CommandHandler:
 
     # ON CREATION, RECORD CLIENT VARIABLE
@@ -46,30 +43,3 @@ class CommandHandler:
                             break
                 else:
                     break
-
-
-# MAIN FUNCTION
-def hello_function(message, client, args):
-    try:
-        return 'Hello {}, Argument One: {}'.format(message.author, args[0])
-    except Exception as e:
-        return e
-
-
-# COMMAND DICTIONARY
-ch.add_command({
-    # IF MESSAGE STARTS WITH TRIGGER
-    'trigger': '!hello',
-
-    # CALL MAIN FUNCTION
-    'function': hello_function,
-
-    # NUMBER OF ARGUMENTS NEEDED
-    'args_num': 1,
-
-    # NAME OF THE ARGUMENT
-    'args_name': ['string'],
-
-    # DESCRIBE WHAT FUNCTION DOES
-    'description': 'Will respond hello to the caller and show arg 1'
-})
