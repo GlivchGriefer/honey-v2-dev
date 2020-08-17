@@ -8,7 +8,7 @@ from Commands.CommandHandler import CommandHandler
 # VARIABLES
 client = discord.client
 bot = commands.Bot(command_prefix='-')
-ch = CommandHandler(bot)
+ch = CommandHandler(client)
 
 
 # BOT IS READY
@@ -23,34 +23,6 @@ async def on_ready():
 
     except Exception as e:
         print(e)
-
-
-# ADD COMMANDS ---------------------------------------------------------------------------------------------------------
-# HELLO
-def hello_function(message, args):
-    try:
-        return 'Hello {}, Argument One: {}'.format(message.author, args[0])
-    except Exception as e:
-        return e
-
-
-ch.add_command({
-    # IF MESSAGE STARTS WITH TRIGGER
-    'trigger': '-hello',
-
-    # CALL MAIN FUNCTION
-    'function': hello_function,
-
-    # NUMBER OF ARGUMENTS NEEDED
-    'args_num': 1,
-
-    # NAME OF THE ARGUMENT
-    'args_name': ['string'],
-
-    # DESCRIBE WHAT FUNCTION DOES
-    'description': 'Will respond hello to the caller and show arg 1'
-})
-# ADD COMMANDS ---------------------------------------------------------------------------------------------------------
 
 
 # IGNORE MESSAGES FROM BOT | TRY COMMAND HANDLER
