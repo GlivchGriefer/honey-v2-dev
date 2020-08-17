@@ -19,4 +19,4 @@ async def on_message(m):
         return
 
 
-bot.run(os.environ.get('BOT_TOKEN'))
+bot.run(os.environ['BOT_TOKEN'])
