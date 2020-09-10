@@ -5,7 +5,7 @@ from discord.ext import commands
 
 
 # VARIABLES
-bot = commands.Bot(command_prefix='-')
+bot = commands.Bot(command_prefix='.')
 
 
 # BOT IS READY
