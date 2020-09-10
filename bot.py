@@ -25,7 +25,7 @@ async def on_ready():
 # ADD COMMANDS ---------------------------------------------------------------------------------------------------------
 @bot.command()
 async def ping(ctx):
-    await ctx.send('pong')
+    await ctx.send("pong")
 # ----------------------------------------------------------------------------------------------------------------------
 
 
@@ -36,5 +36,6 @@ async def on_message(message):
     if message.author == bot.user:
         pass
 
+bot.add_command(ping)
 
 bot.run(os.environ["BOT_TOKEN"])
