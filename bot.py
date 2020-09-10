@@ -25,8 +25,10 @@ async def on_ready():
 # ADD COMMANDS ---------------------------------------------------------------------------------------------------------
 @bot.command(pass_context=True)
 async def ping(ctx):
-    await bot.say("pong")
-    await bot.delete_message(ctx.message)
+    if ctx.message.content.upper().startswith('.ping'):
+        user_id = ctx.message.author.id
+        await bot.send_message(ctx.message, "<@%s> Pong!" % user_id)
+        await bot.delete_message(ctx.message)
 # ----------------------------------------------------------------------------------------------------------------------
 
 
