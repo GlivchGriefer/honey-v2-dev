@@ -23,9 +23,10 @@ async def on_ready():
 
 
 # ADD COMMANDS ---------------------------------------------------------------------------------------------------------
-@bot.command(name='p')
+@bot.command(pass_context=True)
 async def ping(ctx):
-    await ctx.send("pong")
+    await bot.say("pong")
+    await bot.delete_message(ctx.message)
 # ----------------------------------------------------------------------------------------------------------------------
 
 
