@@ -36,6 +36,4 @@ async def on_message(message):
     if message.author == bot.user:
         pass
 
-bot.add_command(ping)
-
 bot.run(os.environ["BOT_TOKEN"])
