@@ -1,35 +1,58 @@
 # IMPORTS
 import os
 import discord
+from dotenv import load_dotenv
 from discord.ext import commands
-
+import nest_asyncio
 
 # VARIABLES
-bot = commands.Bot(command_prefix='.')
+load_dotenv()
+token = os.environ["BOT_TOKEN"]
+cid = os.environ["CLIENT_ID"]
+oa2 = os.environ["CLIENT_SECRET"]
+status = 'TEST STATUS'
+
+bot = commands.Bot(command_prefix='•')
 
 
-# BOT IS READY
+# BASE EVENTS ----------------------------------------------------------------------------------------------------------
 @bot.event
 async def on_ready():
-    try:
-        # PRINT BOT INFORMATION TO CONSOLE
-        print(bot.user.name)
-        print(bot.user.id)
-        print('Discord.py Version: {}'.format(discord.__version__))
-        print('All systems nominal....')
+    # PRINT BOT INFORMATION TO CONSOLE
+    print(f'\npython 3.8.3')
+    print(f'\nDiscord.py(Version: {discord.__version__})')
+    print(f'\nBot connected as {bot.user.name}')
+    print(f'\nBot ID: {bot.user.id}')
+    print('\nAll events and commands loaded')
+    print('\nAll systems nominal....')
+    bot.remove_command('help')
 
-    except Exception as e:
-        print(e)
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="to Speaker Honey"))
+    # LOAD EXTERNAL PROGRAMS FROM OS
+    for file in os.listdir('events'):
+        # EVENTS
+        directory = 'events.'
+        if not file.startswith('__'):
+            name = file.replace('.py', '')
+            bot.load_extension(directory + name)
+    for x in os.walk('commands', topdown=False):
+        # COMMANDS
+        for y in x[1]:
+            if not y.startswith('__'):
+                directory = 'commands.{}.'.format(y)
+                for file in os.listdir('commands/{}'.format(y)):
+                    if not file.startswith('__'):
+                        name = file.replace('.py', '')
+                        bot.load_extension(directory + name)
 
 
-# ADD COMMANDS ---------------------------------------------------------------------------------------------------------
-@bot.command(pass_context=True)
-async def ping(ctx):
-    if ctx.message.content.upper().startswith('.ping'):
-        user_id = ctx.message.author.id
-        await bot.send_message(ctx.message, "<@%s> Pong!" % user_id)
-        await bot.delete_message(ctx.message)
-# ----------------------------------------------------------------------------------------------------------------------
+# INITIALIZE BOT -------- ----------------------------------------------------------------------------------------------
+
+# ADMIN COMMANDS / EVENTS ----------------------------------------------------------------------------------------------
+@bot.command()
+async def test(message):
+    print('\nTest successful!')
+    await message.channel.send('Testing 1 2 3!')
 
 
 # IGNORE MESSAGES FROM BOT | TRY COMMAND HANDLER
@@ -38,5 +61,7 @@ async def on_message(message):
     # if the message is from the bot itself ignore it
     if message.author == bot.user:
         pass
+    await bot.process_commands(message)
 
+# ----------------------------------------------------------------------------------------------------------------------
 bot.run(os.environ["BOT_TOKEN"])
