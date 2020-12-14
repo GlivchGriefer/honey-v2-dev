@@ -31,25 +31,6 @@ async def on_ready():
     bot.remove_command('help')
 
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="LFG Radio"))
-    # LOAD EXTERNAL PROGRAMS FROM OS
-    print('\n••••loading cogs••••')
-    for file in os.listdir('events'):
-        # EVENTS
-        directory = 'events.'
-        if not file.startswith('__'):
-            name = file.replace('.py', '')
-            bot.load_extension(directory + name)
-            print("\n SUCCESS | " + name)
-    for x in os.walk('commands', topdown=False):
-        # COMMANDS
-        for y in x[1]:
-            if not y.startswith('__'):
-                directory = 'commands.{}.'.format(y)
-                for file in os.listdir('commands/{}'.format(y)):
-                    if not file.startswith('__'):
-                        name = file.replace('.py', '')
-                        bot.load_extension(directory + name)
-                        print("\n SUCCESS | " + name)
 
 
 # ADMIN COMMANDS / EVENTS ----------------------------------------------------------------------------------------------
