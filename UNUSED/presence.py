@@ -2,7 +2,6 @@ from pypresence import Presence
 import time
 import os
 
-pass
 """
 # PRESENCE -------------------------------------------------------------------------------------------------------------
 cid = os.environ["CLIENT_ID"]
