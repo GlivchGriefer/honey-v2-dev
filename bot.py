@@ -57,9 +57,9 @@ async def on_message(message):
 
 # ----------------------------------------------------------------------------------------------------------------------
 @bot.command()
-async def submit(ctx, *, arg):
+async def submit(ctx, *, arg):  # |!| COMPLETE MODULE WITH WORKING CODE
     """
-   TODO: DOCUMENTATION
+   [D]
    """
     discord_id = ctx.message.author.id
     username = ctx.message.author
@@ -71,10 +71,8 @@ async def submit(ctx, *, arg):
     id = None
 
     try:
-        # read database configuration
-        params = os.environ["DBCONNECT"]
         # connect to the PostgreSQL database
-        conn = psycopg2.connect(params)
+        conn = psycopg2.connect(os.environ["DATABASE_URL"], sslmode='require')
         # create a new cursor
         cur = conn.cursor()
         # execute the INSERT statement
