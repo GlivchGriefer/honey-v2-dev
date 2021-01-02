@@ -103,7 +103,7 @@ async def a(ctx, *, arg):
 
     # [Invite Link]
     em0 = discord.Embed(color=12190705)
-    em0.title = emoji + "Speaker Honey Invite Link" + emoji
+    em0.title = str(emoji) + "Speaker Honey Invite Link" + str(emoji)
     em0.add_field(name="Invite to #rules-for-access:", value="discord.gg/fJhhkXn")
 
     # Initialize list of announcements [EMBEDS]
