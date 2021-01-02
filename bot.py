@@ -108,8 +108,8 @@ async def a(ctx, *, arg):
 
     # [QoneHead Announcement]
     em1 = discord.Embed(color=16098851)  # orange
-    e1 = get(ctx.message.guild.emojis, name="FeelsLagMan")
-    role = ctx.guild.get_role(559692297642442764)
+    e1 = get(ctx.message.guild.emojis, name="QONE")
+    role = ctx.guild.get_role(783796754189385808)
     em1.title = "Attention " + str(e1) + "Heads!"
     em1.set_image(url="https://media.discordapp.net/attachments/564008583411269633/794937189699026964/unknown.png")
     em1.description = f"{role.mention}" \
