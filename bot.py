@@ -99,7 +99,7 @@ async def submit(ctx, *, arg):  # |!| COMPLETE MODULE WITH WORKING CODE
 async def a(ctx, *, arg):
     await discord.message.Message.delete(ctx.message)
     check_error = None
-    emoji = get(ctx.message.server.emojis, name="xar2EDM")
+    emoji = get(ctx.message.guildgit.emojis, name="xar2EDM")
 
     # [Invite Link]
     em0 = discord.Embed(color=12190705)
