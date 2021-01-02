@@ -109,7 +109,7 @@ async def a(ctx, *, arg):
     # Initialize list of announcements [EMBEDS]
     an = [em0]
     try:
-        await ctx.message.channel.send(embed=an[int(arg)], delete_after=15)  # |!| DOES NOT AUTO-DELETE
+        await ctx.message.channel.send(embed=an[int(arg)])
 
     except IndexError as error:
         check_error = True
