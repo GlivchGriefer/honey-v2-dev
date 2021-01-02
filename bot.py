@@ -2,6 +2,7 @@
 import os
 import discord
 import psycopg2
+from discord.utils import get
 from dotenv import load_dotenv
 from discord.ext import commands
 
@@ -92,6 +93,34 @@ async def submit(ctx, *, arg):  # |!| COMPLETE MODULE WITH WORKING CODE
     finally:
         if conn is not None:
             conn.close()
+
+
+@bot.command()
+async def a(ctx, *, arg):
+    await discord.message.Message.delete(ctx.message)
+    check_error = None
+    emoji = get(ctx.message.server.emojis, name="xar2EDM")
+
+    # [Invite Link]
+    em0 = discord.Embed(color=12190705)
+    em0.title = emoji + "Speaker Honey Invite Link" + emoji
+    em0.add_field(name="Invite to #rules-for-access:", value="discord.gg/fJhhkXn")
+
+    # Initialize list of announcements [EMBEDS]
+    an = [em0]
+    try:
+        await ctx.message.channel.send(embed=an[int(arg)], delete_after=15)  # |!| DOES NOT AUTO-DELETE
+
+    except IndexError as error:
+        check_error = True
+        await ctx.message.channel.send("ERROR: " + str(error), delete_after=15)
+        print("\nAnnounce Error: " + str(error))
+
+    finally:
+        if check_error is not True:
+            print("\nAnnouncement #" + arg + " was successfully posted to " + str(ctx.message.channel))
+
+
 # ----------------------------------------------------------------------------------------------------------------------
 
 bot.run(os.environ["BOT_TOKEN"])
