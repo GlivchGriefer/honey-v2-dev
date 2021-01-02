@@ -99,15 +99,31 @@ async def submit(ctx, *, arg):  # |!| COMPLETE MODULE WITH WORKING CODE
 async def a(ctx, *, arg):
     await discord.message.Message.delete(ctx.message)
     check_error = None
-    emoji = get(ctx.message.guild.emojis, name="xar2EDM")
 
     # [Invite Link]
-    em0 = discord.Embed(color=12190705)
-    em0.title = str(emoji) + " Speaker Honey Invite Link " + str(emoji)
+    em0 = discord.Embed(color=12190705)  # purple
+    e0 = get(ctx.message.guild.emojis, name="xar2EDM")
+    em0.title = str(e0) + " Speaker Honey Invite Link " + str(e0)
     em0.add_field(name="Invite to #rules-for-access:", value="discord.gg/fJhhkXn")
 
+    # [QoneHead Announcement]
+    em1 = discord.Embed(color=16098851)  # orange
+    e1 = get(ctx.message.guild.emojis, name="FeelsLagMan")
+    em1.title = "Attention " + str(e1) + "Heads!"
+    em1.set_image(url="https://media.discordapp.net/attachments/564008583411269633/794937189699026964/unknown.png")
+    em1.description = "The time has almost come! Development for Share Your Song Monday submissions is going well and " \
+                      "the work is almost complete. We may be able to submit to the bot before the next stream but I " \
+                      "have to iron out more details still. I will need some of you to test submissions soon and I " \
+                      "still need to do complete some basic functions like retrieving a list from the database and " \
+                      "creating a re-submit command that replaces the current link for a user." \
+                      "\n\nBelow is a preview of what's in progress and check out the rules channel for the new " \
+                      "invite link embed." \
+                      "\n\nIf anyone has any ideas or can think of any ways a bot can help people enjoy the server more" \
+                      ", let me know!" \
+                      "\n\n*-GG*"
+
     # Initialize list of announcements [EMBEDS]
-    an = [em0]
+    an = [em0, em1]
     try:
         await ctx.message.channel.send(embed=an[int(arg)])
 
