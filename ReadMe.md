@@ -1,6 +1,6 @@
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![GitHub release](https://img.shields.io/github/release/GlivchGriefer/honey-v2-dev.svg)](https://github.com/GlivchGriefer/honey-v2-dev/releases)
-[![Discord](https://img.shields.io/discord/698037482050289704.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/fJhhkXn)
+[![Support Server](https://img.shields.io/discord/698037482050289704.svg?color=7289da&label=TestingMeme&logo=discord&style=flat-square)](https://discord.gg/fJhhkXn)
 ==================================
 honey v2 | Link Submission Manager
 ==================================
