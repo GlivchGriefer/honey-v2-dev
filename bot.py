@@ -173,7 +173,7 @@ def list_submissions(sql2, ctx):
         list_as_string = str(embed_list)
         listsize = len(list_as_string)
         # CATCH max embed length (100 chars)
-        if listsize <= 100:
+        if (listsize-15) <= 2048:
             if not a:
                 first = discord.Embed(color=discord.Color.green())
                 first.title = "Submission success!"
