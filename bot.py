@@ -151,19 +151,25 @@ def list_submissions(sql2, ctx):
 
         e_desc = " ".join(submissionlist)
         print(e_desc)
-        embed_list = discord.Embed(color='#700400', description=e_desc)
-        if not a:
-            first = discord.Embed(color=discord.Color.green())
-            first.title = "Submission success!"
-            return first
+        embed_list = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0), description=e_desc)
+        list_as_string = str(embed_list)
+        listsize = len(list_as_string)
+        # CATCH max embed length (100 chars)
+        if listsize <= 100:
+            if not a:
+                first = discord.Embed(color=discord.Color.green())
+                first.title = "Submission success!"
+                return first
+            else:
+                embed_list.title = "Current submissions: " + str(cur.rowcount)
+                return embed_list
         else:
-            embed_list.title = "Current submissions: " + str(cur.rowcount)
-            return embed_list
+            print("\n∟ EXCEEDED")
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
         # print("•mÖÐEQ©:←↓↓↑→→∟§&←↓∟UA-↓Ü~→○○○○")
-        print("\nEMBED SENT to \"" + str(ctx.channel) + "\"")
+        print("\nEMBED SENT to \"" + str(ctx.channel) + "\"\n  ∟" + str(listsize) + "chars")
 
 
 @bot.command()  # Announce
