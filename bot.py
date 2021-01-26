@@ -106,11 +106,11 @@ async def sys(ctx, *, arg):
             #                     it appears to be showing as a string but on the backend is acting like
             #                     a member object
             # if channel is sys,  reply with list of submissions
-            if str(ctx.channel) == "🕋🚧🌐🔣":  # |•| SET TO CORRECT CHANNEL
+            if str(ctx.channel) == "qone-zone2":  # |•| SET TO CORRECT CHANNEL
                 # await ctx.channel.purge(limit=1)  # Delete current list
                 await ctx.channel.send(embed=list_submissions(sql2, ctx), delete_after=5)  # |•| WILL NOT AUTO-DELETE
             else:
-                await ctx.channel.send("ONLY USE THAT COMMAND IN 🕋🚧🌐🔣", delete_after=15)
+                await ctx.channel.send("ONLY USE THAT COMMAND IN qone-zone2", delete_after=15)
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
             print("\nThere was an error submitting to sys_monday!")
