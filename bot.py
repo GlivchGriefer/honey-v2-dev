@@ -78,7 +78,7 @@ async def sys(ctx, *, arg):
     conn = None
     id = None
 
-    if "qonehead" in [y.name.lower() for y in ctx.message.author.roles]:  # |•| CHANGE ROLE TO TWITCH SUB or list
+    if "fortunate one" or "admin" in [y.name.lower() for y in ctx.message.author.roles]:
         # ATTEMPT SUBMISSION
         try:
             # connect to the PostgreSQL database
@@ -102,15 +102,15 @@ async def sys(ctx, *, arg):
             embed_s.description = "Your submission has been accepted!"
             await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
 
-            if str(ctx.channel) == "qone-zone2":  # |•| SET TO CORRECT CHANNEL
+            if str(ctx.channel) == "share-your-song":  # |•| SET TO CORRECT CHANNEL
                 await ctx.channel.purge(limit=1)  # Delete current list
                 await ctx.channel.send(embed=list_submissions(sql2, ctx))  # |•| WILL NOT AUTO-DELETE
             else:
-                await ctx.channel.send("ONLY USE THAT COMMAND IN qone-zone2", delete_after=15)
+                await ctx.channel.send("ONLY USE THAT COMMAND IN share-your-song", delete_after=15)
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
             print("\nThere was an error submitting to sys_monday!")
-            await ctx.message.channel.send("There was an error submitting to sys_monday!"
+            await ctx.message.channel.send("There was an error submitting to Share Your Song Monday!"
                                            + "\n***" + str(error) + "***", delete_after=15)
         finally:
             print("\n-- #" + str(submission_id) + " SUCCESS " + str(ctx.message.author))
@@ -173,19 +173,23 @@ def list_submissions(sql2, ctx):
 
 
 @bot.command()  # Announce
-async def a(ctx, *, arg):  # |!| optimize using randint and for loop
+async def a(ctx, *, arg):
     await discord.message.Message.delete(ctx.message)
     check_error = None
 
+    # NO SUBMISSIONS
+    em2 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0),
+                        description="Submit using -sys followed by your link")
+    em2.title="Current submissions: 0"
     # [Invite Link]
     em0 = discord.Embed(color=12190705)  # purple
-    e0 = get(ctx.message.guild.emojis, name="HACKS")
+    e0 = get(ctx.message.guild.emojis, name="xar2EDM")
     em0.title = str(e0) + " Speaker Honey Invite Link " + str(e0)
     em0.add_field(name="Invite to #rules-for-access:", value="discord.gg/fJhhkXn")
 
     # [QoneHead Announcement]
     em1 = discord.Embed(color=16098851)  # orange
-    e1 = get(ctx.message.guild.emojis, name="FeelsLagMan")
+    e1 = get(ctx.message.guild.emojis, name="QONE")
     role = ctx.guild.get_role(559692297642442764)  # @Owner
     em1.title = "Attention " + str(e1) + "Heads!"
     em1.set_image(url="https://media.discordapp.net/attachments/564008583411269633/794937189699026964/unknown.png")
@@ -203,7 +207,7 @@ async def a(ctx, *, arg):  # |!| optimize using randint and for loop
                     f"{ctx.author.mention}"
 
     # Initialize list of announcements [EMBEDS]
-    an = [em0, em1]
+    an = [em0, em1, em2]
     try:
         await ctx.message.channel.send(embed=an[int(arg)], delete_after=45)  # |!| DOES NOT AUTO-DELETE
 
