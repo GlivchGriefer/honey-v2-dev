@@ -126,6 +126,7 @@ def list_submissions(sql2, ctx):
     :param sql2:
     :return:
     """
+    listsize = 0
     try:
         conn = psycopg2.connect(os.environ["DATABASE_URL"], sslmode='require')
         conn.autocommit = True
