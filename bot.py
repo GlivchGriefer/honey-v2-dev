@@ -78,7 +78,7 @@ async def sys(ctx, *, arg):
     conn = None
     id = None
 
-    if "owner" in [y.name.lower() for y in ctx.message.author.roles]:  # |•| CHANGE ROLE TO TWITCH SUB or list
+    if "QoneHead" in [y.name.lower() for y in ctx.message.author.roles]:  # |•| CHANGE ROLE TO TWITCH SUB or list
         # ATTEMPT SUBMISSION
         try:
             # connect to the PostgreSQL database
