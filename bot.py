@@ -177,10 +177,6 @@ async def a(ctx, *, arg):
     await discord.message.Message.delete(ctx.message)
     check_error = None
 
-    # NO SUBMISSIONS
-    em2 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0),
-                        description="Submit using -sys followed by your link")
-    em2.title="Current submissions: 0"
     # [Invite Link]
     em0 = discord.Embed(color=12190705)  # purple
     e0 = get(ctx.message.guild.emojis, name="xar2EDM")
@@ -205,6 +201,11 @@ async def a(ctx, *, arg):
                     ", let me know!" \
                     "\n\n- " \
                     f"{ctx.author.mention}"
+
+    # NO SUBMISSIONS
+    em2 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0),
+                        description="Submit using -sys followed by your link")
+    em2.title = "Current submissions: 0"
 
     # Initialize list of announcements [EMBEDS]
     an = [em0, em1, em2]
