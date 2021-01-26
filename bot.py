@@ -68,8 +68,10 @@ class KeepClean(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, msg):
         channel = msg.channel
+        if msg.author == bot.user:
+            pass
         if str(channel) == "share-your-song":
-            if not str(msg.content).startswith('-sys'):
+            if not msg.author == bot.user and not str(msg.content).startswith('-sys'):
                 await discord.message.Message.delete(msg)
             else:
                 pass
