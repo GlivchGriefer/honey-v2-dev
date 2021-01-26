@@ -16,7 +16,7 @@ cid = os.environ["CLIENT_ID"]
 oa2 = os.environ["CLIENT_SECRET"]
 status = 'TEST STATUS'
 
-bot = commands.Bot(command_prefix='•')
+bot = commands.Bot(command_prefix='-')
 
 
 # BASE EVENTS ----------------------------------------------------------------------------------------------------------
