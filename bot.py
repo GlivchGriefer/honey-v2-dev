@@ -167,7 +167,7 @@ def list_submissions(sql2, ctx):
 
         e_desc = " ".join(submissionlist)
         print(e_desc)
-        embed_list = discord.Embed(color=660000, description=e_desc)
+        embed_list = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0), description=e_desc)
         list_as_string = str(embed_list)
         listsize = len(list_as_string)
         # CATCH max embed length (100 chars)
@@ -219,7 +219,7 @@ async def a(ctx, *, arg):
             "\n\n*All messages in this channel " \
             "will be deleted immediately. You will know if your submission is successful.*" \
             "\n**DO NOT SUBMIT MORE THAN ONCE PER WEEK**"
-    em1 = discord.Embed(color=660000, description=em1_d)
+    em1 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0), description=em1_d)
     # Initialize list of announcements [EMBEDS]
     an = [em0, em1]
     try:
