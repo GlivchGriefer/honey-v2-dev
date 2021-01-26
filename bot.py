@@ -60,6 +60,22 @@ async def on_message(message):
 
 
 # ----------------------------------------------------------------------------------------------------------------------
+class KeepClean(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+        self._last_member = None
+
+    @commands.Cog.listener()
+    async def on_message(self, msg):
+        channel = msg.channel
+        if str(channel) == "share-your-song":
+            if not str(msg.content).startswith('-sys'):
+                await discord.message.Message.delete(msg)
+            else:
+                pass
+
+            
+# ----------------------------------------------------------------------------------------------------------------------
 @bot.command()  # |•| Beautify embed
 async def sys(ctx, *, arg):
     """
