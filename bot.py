@@ -134,7 +134,7 @@ async def sys(ctx, *, arg):
                 conn.close()
 
 
-# list_submissions |!| beautify formatting MAKE COMMAND FOR THIS ONLY
+# list_submissions |!| beautify formatting
 def list_submissions(sql2, ctx):
     """
     [D]
@@ -167,7 +167,7 @@ def list_submissions(sql2, ctx):
 
         e_desc = " ".join(submissionlist)
         print(e_desc)
-        embed_list = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0), description=e_desc)
+        embed_list = discord.Embed(color=660000, description=e_desc)
         list_as_string = str(embed_list)
         listsize = len(list_as_string)
         # CATCH max embed length (100 chars)
@@ -188,6 +188,13 @@ def list_submissions(sql2, ctx):
         print("\nEMBED SENT to \"" + str(ctx.channel) + "\"\n  ∟" + str(listsize) + "chars")
 
 
+@bot.command()  # Show submissions (sys)
+async def s(ctx):
+    await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
+    sql = """SELECT id, username, link FROM sys_monday ORDER BY id"""
+    await ctx.channel.send(embed=list_submissions(sql, ctx))
+
+
 @bot.command()  # Announce
 async def a(ctx, *, arg):
     await discord.message.Message.delete(ctx.message)
@@ -198,8 +205,23 @@ async def a(ctx, *, arg):
                         description="Submit using -sys followed by your link")
     em0.title = "Current submissions: 0"
 
+    # sys rules
+    em1_d = "**Please do not post anything but the submission command to this channel.**" \
+            "\n\nSimply type -sys 'the link to your song'\nEx) -sys https://soundcloud.com/" \
+            "\n\nRules:" \
+            "\n[1] Only submit works in progress, or remixes by YOU not someone else." \
+            "\n[2] No already released songs, only works in progress. " \
+            "This isn't share my EP time, it's meant to give feedback and productive guidance that can applied to" \
+            " tracks still in progress (please only link your new releases in #got-a-release-post-it-here )." \
+            "\n[3] Only one track per artist each stream." \
+            "\n[4] Finally, please be present when Speaker Honey is approaching your track during stream." \
+            "\n\nTune in Mondays at 7:30 PM PST" \
+            "\n\n*All messages in this channel " \
+            "will be deleted immediately. You will know if your submission is successful.*" \
+            "\n**DO NOT SUBMIT MORE THAN ONCE PER WEEK**"
+    em1 = discord.Embed(color=660000, description=em1_d)
     # Initialize list of announcements [EMBEDS]
-    an = [em0]
+    an = [em0, em1]
     try:
         await ctx.message.channel.send(embed=an[int(arg)])
 
@@ -235,5 +257,5 @@ async def cr(ctx):  # check role
     else:
         await ctx.message.channel.send("FAIL", delete_after=5)
 # ----------------------------------------------------------------------------------------------------------------------
-
+bot.add_cog(KeepClean(bot))
 bot.run(os.environ["BOT_TOKEN"])
