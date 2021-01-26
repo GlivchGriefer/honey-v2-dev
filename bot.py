@@ -189,7 +189,7 @@ def list_submissions(sql2, ctx):
 
 
 @bot.command()  # Show submissions (sys)
-async def s(ctx):
+async def show(ctx):
     await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
     sql = """SELECT id, username, link FROM sys_monday ORDER BY id"""
     await ctx.channel.send(embed=list_submissions(sql, ctx))
