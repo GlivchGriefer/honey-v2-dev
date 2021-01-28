@@ -163,11 +163,11 @@ def list_submissions(sql2, ctx):
         for _ in one_submission:
             tl = str(_).split(',')
             o1 = '\n' + re.sub("[('[]", '', str(tl[0]))
-            o2 = re.sub("[\'\"]", '', str(tl[1]))
-            o3 = "[link](" + re.sub("[]'\"]", '', str(tl[2]) + ")")
+            o2 = '\t' + re.sub("[\'\"]", '', str(tl[1]))
+            o3 = "\t\t\t\t[link](" + re.sub("[]'\"]", '', str(tl[2]) + ")")
             submissionlist.append(o1 + o2 + o3)
 
-        e_desc = "\n-   -   -   -   -".join(submissionlist)
+        e_desc = "\n-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -".join(submissionlist)
         print(e_desc)
         embed_list = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0), description=e_desc)
         list_as_string = str(embed_list)
