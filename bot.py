@@ -167,7 +167,7 @@ def list_submissions(sql2, ctx):
             o3 = "\t\t\t\t[link](" + re.sub("[]'\"]", '', str(tl[2]) + ")")
             submissionlist.append(o1 + o2 + o3)
 
-        e_desc = "\n-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -".join(submissionlist)
+        e_desc = "".join(submissionlist)
         print(e_desc)
         embed_list = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0), description=e_desc)
         list_as_string = str(embed_list)
