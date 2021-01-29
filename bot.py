@@ -164,7 +164,7 @@ def list_submissions(sql2, ctx):
             tl = str(_).split(',')
             o1 = '\n' + re.sub("[('[]", '', str(tl[0]))
             o2 = '\t' + re.sub("[\'\"]", '', str(tl[1]))
-            o3 = "\t\t\t\t[link](" + re.sub("[]'\"]", '', str(tl[2]) + ")")
+            o3 = "\t\t\t\t\t\t\t[link](" + re.sub("[]'\"]", '', str(tl[2]) + ")")
             submissionlist.append(o1 + o2 + o3)
 
         e_desc = "".join(submissionlist)
