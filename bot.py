@@ -5,7 +5,6 @@ from random import randrange
 
 import discord
 import psycopg2
-from discord.utils import get
 from dotenv import load_dotenv
 from discord.ext import commands
 
@@ -75,7 +74,12 @@ class KeepClean(commands.Cog):
                 await discord.message.Message.delete(msg)
             else:
                 pass
-
+        if str(channel) == "i-think-its-finished-challenge":
+            if not msg.author == bot.user:
+                await discord.message.Message.delete(msg)
+                msg.channel.send("There is currently no challenge ongoing.", delete_after=5)
+            else:
+                pass
             
 # ----------------------------------------------------------------------------------------------------------------------
 @bot.command()  # |•| Beautify embed
@@ -249,6 +253,30 @@ async def rng(ctx):
 async def d(ctx, arg: int):
     await discord.message.Message.delete(ctx.message)
     await ctx.channel.purge(limit=arg)
+
+
+@bot.command()  # delete sys submission
+async def ds(ctx, arg: int):
+    await discord.message.Message.delete(ctx.message)
+    number = arg
+    sql = """DELETE FROM table_1 WHERE id = %s;"""
+    conn = None
+    try:
+        conn = psycopg2.connect(os.environ["DATABASE_URL"], sslmode='require')
+        conn.autocommit = True
+        cur = conn.cursor()
+        cur.execute(sql, number)
+        conn.commit()
+        cur.close()
+        conn.close()
+
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        print('\nSubmission #' + number + ' successfully deleted from database!')
+        ctx.message.channel.send('Submission #' + number + ' successfully deleted from database!', delete_after=5)
+        if conn is not None:
+            conn.close()
 
 
 @bot.command()
