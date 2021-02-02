@@ -80,7 +80,8 @@ class KeepClean(commands.Cog):
                 msg.channel.send("There is currently no challenge ongoing.", delete_after=5)
             else:
                 pass
-            
+
+
 # ----------------------------------------------------------------------------------------------------------------------
 @bot.command()  # |•| Beautify embed
 async def sys(ctx, *, arg):
@@ -103,28 +104,27 @@ async def sys(ctx, *, arg):
     if "fortunate one" or "admin" in [y.name.lower() for y in ctx.message.author.roles]:
         # ATTEMPT SUBMISSION
         try:
-            # connect to the PostgreSQL database
-            conn = psycopg2.connect(os.environ["DATABASE_URL"], sslmode='require')
-            # set auto commit to false
-            conn.autocommit = True
-            # create a new cursor
-            cur = conn.cursor()
-            # execute the INSERT statement
-            cur.execute(sql, (discord_id, username, link,))
-            # get the generated id back
-            submission_id = cur.fetchone()[0]
-            # commit the changes to the database
-            conn.commit()
-            # close communication with the database
-            cur.close()
-
-            # report success in logs and channel
-            print('\n' + username + ' submitted to [sys_monday]  • • •  ID: ' + str(submission_id))
-            embed_s.title = "Success!"
-            embed_s.description = "Your submission has been accepted!"
-            await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
-
             if str(ctx.channel) == "share-your-song":  # |•| SET TO CORRECT CHANNEL
+                # connect to the PostgreSQL database
+                conn = psycopg2.connect(os.environ["DATABASE_URL"], sslmode='require')
+                # set auto commit to false
+                conn.autocommit = True
+                # create a new cursor
+                cur = conn.cursor()
+                # execute the INSERT statement
+                cur.execute(sql, (discord_id, username, link,))
+                # get the generated id back
+                submission_id = cur.fetchone()[0]
+                # commit the changes to the database
+                conn.commit()
+                # close communication with the database
+                cur.close()
+
+                # report success in logs and channel
+                print('\n' + username + ' submitted to [sys_monday]  • • •  ID: ' + str(submission_id))
+                embed_s.title = "Success!"
+                embed_s.description = "Your submission has been accepted!"
+                await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
                 await ctx.channel.purge(limit=1)  # Delete current list
                 await ctx.channel.send(embed=list_submissions(sql2, ctx))  # |•| WILL NOT AUTO-DELETE
             else:
@@ -173,7 +173,7 @@ def list_submissions(sql2, ctx):
 
         e_desc = "".join(submissionlist)
         print(e_desc)
-        embed_list = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0), description=e_desc)
+        embed_list = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0))  # , description=e_desc
         list_as_string = str(embed_list)
         listsize = len(list_as_string)
         # CATCH max embed length (100 chars)
