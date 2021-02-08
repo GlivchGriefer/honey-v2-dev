@@ -173,7 +173,8 @@ def list_submissions(sql2, ctx):
 
         e_desc = "".join(submissionlist)
         print(e_desc)
-        embed_list = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0))  # , description=e_desc
+        dataclip = "[database](https://data.heroku.com/dataclips/cgznlexmgqcoaeselzaziemsrqnh)"
+        embed_list = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0), description=dataclip)  # , description=e_desc
         list_as_string = str(embed_list)
         listsize = len(list_as_string)
         # CATCH max embed length (100 chars)
