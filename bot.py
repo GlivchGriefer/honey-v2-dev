@@ -174,7 +174,7 @@ def list_submissions(sql2, ctx):
             first.title = "Submission success!"
             return first
         else:
-            if int(numofsub) <= 20:
+            if int(numofsub) <= 5:
                 e_desc = "".join(submissionlist)
                 print(e_desc)
             else:
