@@ -153,6 +153,7 @@ def list_submissions(sql2, ctx):
         conn.autocommit = True
         cur = conn.cursor()
         cur.execute(sql2)
+
         results =[]
         one_submission = []
         submissionlist = []
@@ -161,6 +162,7 @@ def list_submissions(sql2, ctx):
         cur.close()
         for entity in results:
             submission = str(entity)[str(entity).find('[')+1:str(entity).find(']')]
+            print(submission)
             one_submission.append(submission.split(','))
         for _ in one_submission:
             tl = str(_).split(',')
@@ -168,22 +170,28 @@ def list_submissions(sql2, ctx):
             o2 = '\t' + re.sub("[\'\"]", '', str(tl[1]))
             o3 = "\t[link](" + re.sub("[]'\"]", '', str(tl[2]) + ")")
             submissionlist.append(o1 + o2 + o3)
-        numofsub = cur.rowcount
-        if int(numofsub) <= 20:
-            e_desc = "".join(submissionlist)
-            print(e_desc)
-        else:
-            e_desc = "Embed is limited to 20 submissions"
-            print("e_desc is empty")
 
-        embed_list = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0), description=e_desc)
-        embed_list.title = "Current submissions: " + numofsub
-        return embed_list
+        e_desc = "".join(submissionlist)
+        print(e_desc)
+        embed_list = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0))  # , description=e_desc
+        list_as_string = str(embed_list)
+        listsize = len(list_as_string)
+        # CATCH max embed length (100 chars)
+        if (listsize-15) <= 2048:
+            if not a:
+                first = discord.Embed(color=discord.Color.green())
+                first.title = "Submission success!"
+                return first
+            else:
+                embed_list.title = "Current submissions: " + str(cur.rowcount)
+                return embed_list
+        else:
+            print("\n∟ EXCEEDED")
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
         # print("•mÖÐEQ©:←↓↓↑→→∟§&←↓∟UA-↓Ü~→○○○○")
-        print("\nEMBED SENT to \"" + str(ctx.channel))
+        print("\nEMBED SENT to \"" + str(ctx.channel) + "\"\n  ∟" + str(listsize) + "chars")
 
 
 @bot.command()  # Show submissions (sys)
