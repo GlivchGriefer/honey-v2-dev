@@ -162,7 +162,6 @@ def list_submissions(sql2, ctx):
         cur.close()
         for entity in results:
             submission = str(entity)[str(entity).find('[')+1:str(entity).find(']')]
-            print(submission)
             one_submission.append(submission.split(','))
         for _ in one_submission:
             tl = str(_).split(',')
@@ -179,13 +178,9 @@ def list_submissions(sql2, ctx):
             if numofsub <= 20:
                 e_desc = "".join(submissionlist)
                 print(e_desc)
-            else:
-                e_desc = "Embed is limited to 20 submissions"
-                print("e_desc is empty")
-
-            embed_list = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0), description=e_desc)
-            embed_list.title = "Current submissions: " + numofsub
-            return embed_list
+                embed_list = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0), description=e_desc)
+                embed_list.title = "Current submissions: " + numofsub
+                return embed_list
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
