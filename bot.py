@@ -170,7 +170,7 @@ def list_submissions(sql2, ctx):
             o2 = '\t' + re.sub("[\'\"]", '', str(tl[1]))
             o3 = "\t[link](" + re.sub("[]'\"]", '', str(tl[2]) + ")")
             submissionlist.append(o1 + o2 + o3)
-        numofsub = str(cur.rowcount)
+        numofsub = cur.rowcount
         if not a:
             first = discord.Embed(color=discord.Color.green())
             first.title = "Submission success!"
