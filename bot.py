@@ -119,10 +119,14 @@ async def sys(ctx, *, arg):
                 conn.commit()
                 # close communication with the database
                 cur.close()
+                sl = list_submissions(sql2, ctx)
 
                 await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
-                await ctx.channel.purge(limit=1)  # Delete current list
-                sl = list_submissions(sql2, ctx)
+                nos = len(sl)
+                if nos > 19:
+                    await ctx.channel.purge(limit=2)  # IF THERE ARE TWO LISTS
+                else:
+                    await ctx.channel.purge(limit=1)  # Delete ONE list
 
                 str1 = ''.join(sl[:19])
                 str2 = ''.join(sl[20:])
@@ -191,8 +195,15 @@ def list_submissions(sql2, ctx):
 @bot.command()  # Show submissions (sys)
 async def show(ctx):
     await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
+
     sql = """SELECT id, username, link FROM sys_monday ORDER BY id"""
     sl = list_submissions(sql, ctx)
+
+    nos = len(sl)
+    if nos > 19:
+        await ctx.channel.purge(limit=2)  # IF THERE ARE TWO LISTS
+    else:
+        await ctx.channel.purge(limit=1)  # Delete ONE list
 
     str1 = ''.join(sl[:19])
     str2 = ''.join(sl[19:])
