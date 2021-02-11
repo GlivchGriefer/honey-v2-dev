@@ -199,12 +199,6 @@ async def show(ctx):
     sql = """SELECT id, username, link FROM sys_monday ORDER BY id"""
     sl = list_submissions(sql, ctx)
 
-    nos = len(sl)
-    if nos > 19:
-        await ctx.channel.purge(limit=2)  # IF THERE ARE TWO LISTS
-    else:
-        await ctx.channel.purge(limit=1)  # Delete ONE list
-
     str1 = ''.join(sl[:19])
     str2 = ''.join(sl[19:])
     e1 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0),
