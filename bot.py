@@ -133,7 +133,7 @@ async def sys(ctx, *, arg):
 
                 # SEND MESSAGE(S)
                 await ctx.channel.send(embed=e1)
-                if str2 is not None:
+                if len(str2) > 0:
                     await ctx.channel.send(embed=e2)
 
             else:
@@ -179,7 +179,7 @@ def list_submissions(sql2, ctx):
             o2 = '\t' + re.sub("[\'\"]", '', str(tl[1]))
             o3 = "\t[link](" + re.sub("[]'\"]", '', str(tl[2]) + ")")
             submissionlist.append(o1 + o2 + o3)
-            return submissionlist
+        return submissionlist
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
@@ -203,7 +203,7 @@ async def show(ctx):
 
     # SEND MESSAGE(S)
     await ctx.channel.send(embed=e1)
-    if str2 is not None:
+    if len(str2) > 0:
         await ctx.channel.send(embed=e2)
 
 
