@@ -104,7 +104,7 @@ async def sys(ctx, *, arg):
     if "fortunate one" or "admin" in [y.name.lower() for y in ctx.message.author.roles]:
         # ATTEMPT SUBMISSION
         try:
-            if str(ctx.channel) == "share-your-song":  # |•| SET TO CORRECT CHANNEL
+            if str(ctx.channel) == "share-your-song":
                 # connect to the PostgreSQL database
                 conn = psycopg2.connect(os.environ["DATABASE_URL"], sslmode='require')
                 # set auto commit to false
@@ -120,13 +120,22 @@ async def sys(ctx, *, arg):
                 # close communication with the database
                 cur.close()
 
-                # report success in logs and channel
-                print('\n' + username + ' submitted to [sys_monday]  • • •  ID: ' + str(submission_id))
-                embed_s.title = "Success!"
-                embed_s.description = "Your submission has been accepted!"
                 await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
                 await ctx.channel.purge(limit=1)  # Delete current list
-                await ctx.channel.send(embed=list_submissions(sql2, ctx))  # |•| WILL NOT AUTO-DELETE
+                sl = list_submissions(sql2, ctx)
+
+                str1 = ''.join(sl[:19])
+                str2 = ''.join(sl[20:])
+                e1 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0),
+                                   description=str1, title="Current submissions: " + sl.len)
+                e2 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0),
+                                   description=str2)
+
+                # SEND MESSAGE(S)
+                await ctx.channel.send(embed=e1)
+                if str2 is not None:
+                    await ctx.channel.send(embed=e2)
+
             else:
                 await ctx.channel.send("ONLY USE THAT COMMAND IN share-your-song", delete_after=15)
         except (Exception, psycopg2.DatabaseError) as error:
@@ -154,14 +163,14 @@ def list_submissions(sql2, ctx):
         cur = conn.cursor()
         cur.execute(sql2)
 
-        results =[]
+        results = []
         one_submission = []
         submissionlist = []
         for result in cur:
             results.append(result)
         cur.close()
         for entity in results:
-            submission = str(entity)[str(entity).find('[')+1:str(entity).find(']')]
+            submission = str(entity)[str(entity).find('[') + 1:str(entity).find(']')]
             print(submission)
             one_submission.append(submission.split(','))
         for _ in one_submission:
@@ -170,29 +179,13 @@ def list_submissions(sql2, ctx):
             o2 = '\t' + re.sub("[\'\"]", '', str(tl[1]))
             o3 = "\t[link](" + re.sub("[]'\"]", '', str(tl[2]) + ")")
             submissionlist.append(o1 + o2 + o3)
+            return submissionlist
 
-        e_desc = "".join(submissionlist)
-        print(e_desc)
-        dataclip = "[database](https://data.heroku.com/dataclips/cgznlexmgqcoaeselzaziemsrqnh)"
-        embed_list = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0), description=dataclip)  # , description=e_desc
-        list_as_string = str(embed_list)
-        listsize = len(list_as_string)
-        # CATCH max embed length (100 chars)
-        if (listsize-15) <= 2048:
-            if not a:
-                first = discord.Embed(color=discord.Color.green())
-                first.title = "Submission success!"
-                return first
-            else:
-                embed_list.title = "Current submissions: " + str(cur.rowcount)
-                return embed_list
-        else:
-            print("\n∟ EXCEEDED")
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
         # print("•mÖÐEQ©:←↓↓↑→→∟§&←↓∟UA-↓Ü~→○○○○")
-        print("\nEMBED SENT to \"" + str(ctx.channel) + "\"\n  ∟" + str(listsize) + "chars")
+        print('list_submissions |SUCCESS|')
 
 
 @bot.command()  # Show submissions (sys)
