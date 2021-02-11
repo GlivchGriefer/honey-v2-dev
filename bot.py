@@ -127,7 +127,7 @@ async def sys(ctx, *, arg):
                 str1 = ''.join(sl[:19])
                 str2 = ''.join(sl[20:])
                 e1 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0),
-                                   description=str1, title="Current submissions: " + len(sl))
+                                   description=str1, title="Current submissions: " + str(len(sl)))
                 e2 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0),
                                    description=str2)
 
@@ -197,7 +197,7 @@ async def show(ctx):
     str1 = ''.join(sl[:19])
     str2 = ''.join(sl[20:])
     e1 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0),
-                       description=str1, title="Current submissions: " + len(sl))
+                       description=str1, title="Current submissions: " + str(len(sl)))
     e2 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0),
                        description=str2)
 
