@@ -192,7 +192,19 @@ def list_submissions(sql2, ctx):
 async def show(ctx):
     await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
     sql = """SELECT id, username, link FROM sys_monday ORDER BY id"""
-    await ctx.channel.send(embed=list_submissions(sql, ctx))
+    sl = list_submissions(sql, ctx)
+
+    str1 = ''.join(sl[:19])
+    str2 = ''.join(sl[20:])
+    e1 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0),
+                       description=str1, title="Current submissions: " + sl.len)
+    e2 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0),
+                       description=str2)
+
+    # SEND MESSAGE(S)
+    await ctx.channel.send(embed=e1)
+    if str2 is not None:
+        await ctx.channel.send(embed=e2)
 
 
 @bot.command()  # Announce
