@@ -129,7 +129,7 @@ async def sys(ctx, *, arg):
                     await ctx.channel.purge(limit=1)  # Delete ONE list
 
                 str1 = ''.join(sl[:19])
-                str2 = ''.join(sl[20:])
+                str2 = ''.join(sl[19:])
                 e1 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0),
                                    description=str1, title="Current submissions: " + str(len(sl)))
                 e2 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0),
