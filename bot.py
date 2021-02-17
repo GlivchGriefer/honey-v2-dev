@@ -123,7 +123,7 @@ async def sys(ctx, *, arg):
 
                 await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
                 nos = len(sl)
-                if nos > 19:
+                if nos > 20:
                     await ctx.channel.purge(limit=2)  # IF THERE ARE TWO LISTS
                 else:
                     await ctx.channel.purge(limit=1)  # Delete ONE list
