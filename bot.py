@@ -74,12 +74,6 @@ class KeepClean(commands.Cog):
                 await discord.message.Message.delete(msg)
             else:
                 pass
-        if str(channel) == "i-think-its-finished-challenge":
-            if not msg.author == bot.user:
-                await discord.message.Message.delete(msg)
-                msg.channel.send("There is currently no challenge ongoing.", delete_after=5)
-            else:
-                pass
 
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -299,4 +293,4 @@ async def cr(ctx):  # check role
         await ctx.message.channel.send("FAIL", delete_after=5)
 # ----------------------------------------------------------------------------------------------------------------------
 bot.add_cog(KeepClean(bot))
-bot.run(os.environ["BOT_TOKEN"])
+bot.run(token)
