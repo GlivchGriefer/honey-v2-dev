@@ -19,7 +19,7 @@ status = 'TEST STATUS'
 bot = commands.Bot(command_prefix='-')
 
 
-# BASE EVENTS ----------------------------------------------------------------------------------------------------------
+# BASE EVENTS ------------------------------------------------------------------
 @bot.event
 async def on_ready():
     """
@@ -34,10 +34,11 @@ async def on_ready():
     print('\n••• All systems nominal....')
     bot.remove_command('help')
 
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="LFG Radio"))
+    await bot.change_presence(activity=discord.Activity(
+        type=discord.ActivityType.listening, name="Together All Night"))
 
 
-# ADMIN COMMANDS / EVENTS ----------------------------------------------------------------------------------------------
+# ADMIN COMMANDS / EVENTS ------------------------------------------------------
 @bot.command()
 @commands.is_owner()
 async def test(message):
@@ -59,7 +60,7 @@ async def on_message(message):
     await bot.process_commands(message)
 
 
-# ----------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 class KeepClean(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -77,7 +78,7 @@ class KeepClean(commands.Cog):
                 pass
 
 
-# ----------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 @bot.command()  # |•| Beautify embed
 async def sys(ctx, *, arg):
     """
@@ -298,6 +299,13 @@ async def ds(ctx, arg: int):
 
 @bot.command()
 async def rr(ctx):  # check role
+    """
+    |!|
+        -where is the command added?
+        -add members with [Fortunate one + READ THE RULES] to list
+        -for testing, send list to chat in embed > success message after
+            each one?
+    """
     await discord.message.Message.delete(ctx.message)
     members = ctx.message.server.members
     count = 0
@@ -308,6 +316,6 @@ async def rr(ctx):  # check role
             count += 1
     await ctx.message.channel.send("Successfully removed 'READ THE RULES' "
         "role from " + str(count) + " members.", delete_after=5)
-# ----------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 bot.add_cog(KeepClean(bot))
 bot.run(token)
