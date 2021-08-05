@@ -5,6 +5,7 @@ from random import randrange
 
 import discord
 import psycopg2
+from discord.utils import get
 from dotenv import load_dotenv
 from discord.ext import commands
 
@@ -135,14 +136,18 @@ async def sys(ctx, *, arg):
                     await ctx.channel.send(embed=e2)
 
             else:
-                await ctx.channel.send("ONLY USE THAT COMMAND IN share-your-song", delete_after=15)
+                await ctx.channel.send("ONLY USE THAT COMMAND IN "
+                                       "share-your-song", delete_after=15)
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
             print("\nThere was an error submitting to sys_monday!")
-            await ctx.message.channel.send("There was an error submitting to Share Your Song Monday!"
-                                           + "\n***" + str(error) + "***", delete_after=15)
+            await ctx.message.channel.send("There was an error submitting to "
+                                           "Share Your Song Monday!"
+                                           + "\n***" + str(error) + "***"
+                                           , delete_after=15)
         finally:
-            print("\n-- #" + str(submission_id) + " SUCCESS " + str(ctx.message.author))
+            print("\n-- #" + str(submission_id) + " SUCCESS " + str(ctx.message.
+                                                                    author))
             if conn is not None:
                 conn.close()
 
@@ -168,7 +173,8 @@ def list_submissions(sql2, ctx):
             results.append(result)
         cur.close()
         for entity in results:
-            submission = str(entity)[str(entity).find('[') + 1:str(entity).find(']')]
+            submission = str(entity)[str(entity).find('[') + 1:str(entity)
+                .find(']')]
             print(submission)
             one_submission.append(submission.split(','))
         for _ in one_submission:
@@ -196,7 +202,8 @@ async def show(ctx):
     str1 = ''.join(sl[:19])
     str2 = ''.join(sl[19:])
     e1 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0),
-                       description=str1, title="Current submissions: " + str(len(sl)))
+                       description=str1, title="Current submissions: "
+                                               + str(len(sl)))
     e2 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0),
                        description=str2)
 
@@ -230,7 +237,8 @@ async def a(ctx, *, arg):
             "\n\n*All messages in this channel " \
             "will be deleted immediately. You will know if your submission is successful.*" \
             "\n**DO NOT SUBMIT MORE THAN ONCE PER WEEK**"
-    em1 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0), description=em1_d)
+    em1 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0),
+                        description=em1_d)
     # Initialize list of announcements [EMBEDS]
     an = [em0, em1]
     try:
@@ -243,7 +251,8 @@ async def a(ctx, *, arg):
 
     finally:
         if check_error is not True:
-            print("\nAnnouncement #" + arg + " was successfully posted to " + str(ctx.message.channel))
+            print("\nAnnouncement #" + arg + " was successfully posted to "
+                  + str(ctx.message.channel))
 
 
 @bot.command()  # Generate a random number
@@ -278,19 +287,27 @@ async def ds(ctx, arg: int):
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
-        print('\nSubmission #' + number + ' successfully deleted from database!')
-        ctx.message.channel.send('Submission #' + number + ' successfully deleted from database!', delete_after=5)
+        print('\nSubmission #' + str(number)
+              + ' successfully deleted from database!')
+        ctx.message.channel.send('Submission #' + str(number)
+                                 + ' successfully deleted from database!'
+                                 , delete_after=5)
         if conn is not None:
             conn.close()
 
 
 @bot.command()
-async def cr(ctx):  # check role
+async def rr(ctx):  # check role
     await discord.message.Message.delete(ctx.message)
-    if "user" in [y.name.lower() for y in ctx.message.author.roles]:
-        await ctx.message.channel.send("Success!", delete_after=5)
-    else:
-        await ctx.message.channel.send("FAIL", delete_after=5)
+    members = ctx.message.server.members
+    count = 0
+    for member in members:
+        if "rules" in [y.name.lower() for y in ctx.message.author.roles]:
+            role = get(ctx.message.server.roles, name='read the rules')
+            await ctx.remove_roles(member, role)
+            count += 1
+    await ctx.message.channel.send("Successfully removed 'READ THE RULES' "
+        "role from " + str(count) + " members.", delete_after=5)
 # ----------------------------------------------------------------------------------------------------------------------
 bot.add_cog(KeepClean(bot))
 bot.run(token)
