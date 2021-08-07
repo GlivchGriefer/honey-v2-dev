@@ -321,7 +321,7 @@ async def rr(ctx):  # check role
         roles = member.roles
         if bad_role in roles:
             try:
-                await member.remove_roles(bad_role)
+                await member.remove_role(bad_role)
                 await ctx.send(f'Removed **TEST**', delete_after=5)
             except:
                 removal_failures += 1
