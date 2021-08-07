@@ -311,10 +311,11 @@ async def rr(ctx):  # check role
     await discord.message.Message.delete(ctx.message)
     num_of_members = ctx.guild.member_count
     count = 0
-    print(num_of_members)
+    print("Current number of members: " + num_of_members)
     for member in ctx.guild.members:
-        if "rules" in [y.name.lower() for y in ctx.message.author.roles]:
-            #role = get(ctx.guild.roles, name='read the rules')
+        if "read the rules" in [y.name.lower() for y in
+                               ctx.message.author.roles]:
+            role = get(ctx.guild.roles, name='read the rules')
             count += 1
     print("The number of members with the role: " + str(count))
     # await ctx.message.channel.send("Successfully removed 'READ THE RULES' "
