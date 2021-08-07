@@ -311,7 +311,7 @@ async def rr(ctx):  # check role
     await discord.message.Message.delete(ctx.message)
     num_of_members = ctx.guild.member_count
     count = 0
-    print("Current number of members: " + num_of_members)
+    print("Current number of members: " + str(num_of_members))
     for member in ctx.guild.members:
         if "read the rules" in [y.name.lower() for y in
                                ctx.message.author.roles]:
