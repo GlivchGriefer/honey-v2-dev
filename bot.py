@@ -33,7 +33,7 @@ async def on_ready():
     print(f'\n•• Bot connected as {bot.user.name}')
     print(f'\n•• Bot ID: {bot.user.id}')
     print('\n••• All events and commands loaded •••')
-    print('\n••• All systems nominal....')
+    print('\n••• All systems nominal....\n\n')
     bot.remove_command('help')
 
     await bot.change_presence(activity=discord.Activity(
@@ -306,6 +306,7 @@ async def rr(ctx):  # check role
     :param ctx:
     """
     await discord.message.Message.delete(ctx.message)
+    print("Removing role from applicable members.")
     await ctx.send("Please wait while I process your request...",
                    delete_after=15)
     removal_failures = 0
