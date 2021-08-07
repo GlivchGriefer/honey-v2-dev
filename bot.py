@@ -312,7 +312,7 @@ async def rr(ctx):  # check role
     num_of_members = ctx.guild.member_count
     count = 0
     print(num_of_members)
-    for member in ctx.guild.fetch_members(limit=None):
+    for member in ctx.guild.members:
         if "rules" in [y.name.lower() for y in ctx.message.author.roles]:
             role = get(ctx.guild.roles, name='read the rules')
             count += 1
