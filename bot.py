@@ -5,6 +5,7 @@ from random import randrange
 
 import discord
 import psycopg2
+from discord import guild
 from discord.utils import get
 from dotenv import load_dotenv
 from discord.ext import commands
@@ -311,8 +312,8 @@ async def rr(ctx):  # check role
     count = 0
     print(int(len(members)))
     for member in members:
-        if "inferno" in [y.name.lower() for y in ctx.message.author.roles]:
-            role = get(ctx.message.server.roles, name='inferno squad')
+        if "rules" in [y.name.lower() for y in ctx.message.author.roles]:
+            role = get(guild.roles, name='read the rules')
             count += 1
         print("The number of members with the role: " + str(count))
     # await ctx.message.channel.send("Successfully removed 'READ THE RULES' "
