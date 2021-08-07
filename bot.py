@@ -311,17 +311,20 @@ async def rr(ctx):  # check role
     await discord.message.Message.delete(ctx.message)
     num_of_members = ctx.guild.member_count
     count = 0
+    removal_failures = 0
     # await ctx.message.channel.send("Current number of members: "
     #                                + str(num_of_members))
     good_role = get(ctx.guild.roles, id=698039243565694989)
     bad_role = get(ctx.guild.roles, name="TEST")
 
     for member in ctx.guild.members:
-        try:
-            await member.remove_roles(bad_role)
-        except:
-            await ctx.send(f"Couldn't remove roles from {member}",
-                           delete_after=5)
+        roles = ctx.message.author.roles
+        if bad_role in roles:
+            try:
+                await member.remove_roles(bad_role)
+            except:
+                removal_failures += 1
+    print(f"Couldn't remove the role from {removal_failures} members.")
     await ctx.send(f'Removed **TEST**', delete_after=5)
 # ------------------------------------------------------------------------------
 bot.add_cog(KeepClean(bot))
