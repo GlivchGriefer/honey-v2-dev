@@ -16,8 +16,9 @@ token = os.environ["BOT_TOKEN"]
 cid = os.environ["CLIENT_ID"]
 oa2 = os.environ["CLIENT_SECRET"]
 status = 'TEST STATUS'
-
-bot = commands.Bot(command_prefix='-')
+intents = discord.Intents.default()
+intents.members = True
+bot = commands.Bot(command_prefix='-', intents=intents)
 
 
 # BASE EVENTS ------------------------------------------------------------------
