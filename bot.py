@@ -318,9 +318,10 @@ async def rr(ctx):  # check role
     bad_role = get(ctx.guild.roles, name="TEST")
 
     for member in ctx.guild.members:
-        roles = ctx.message.author.roles
+        roles = member.roles
         if bad_role in roles:
             try:
+
                 await member.remove_roles(bad_role)
             except:
                 removal_failures += 1
