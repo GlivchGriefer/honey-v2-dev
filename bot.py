@@ -308,16 +308,18 @@ async def rr(ctx):  # check role
         -for testing, send list to chat in embed > success message after
             each one?
     """
+    roles = [698039243565694989, 735248360801435701]
     await discord.message.Message.delete(ctx.message)
     num_of_members = ctx.guild.member_count
     count = 0
-    print("Current number of members: " + str(num_of_members))
+    ctx.reply("Current number of members: " + str(num_of_members))
+    good_role = get(ctx.guild.roles, id=roles[0])
+    bad_role = get(ctx.guild.roles, id=roles[1])
+
     for member in ctx.guild.members:
-        if "read the rules" in [y.name.lower() for y in
-                               ctx.message.author.roles]:
-            role = get(ctx.guild.roles, name='read the rules')
+        if good_role and bad_role in ctx.message.author.roles:
             count += 1
-    print("The number of members with the role: " + str(count))
+    ctx.reply("The number of members with the role: " + str(count))
     # await ctx.message.channel.send("Successfully removed 'READ THE RULES' "
     #                                "role from " + str(count) + " members.",
     #                                delete_after=5)
