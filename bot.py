@@ -311,6 +311,7 @@ async def rr(ctx):  # check role
                    delete_after=15)
     removal_failures = 0
     count = 0
+    need2read = 0
     # await ctx.message.channel.send("Current number of members: "
     #                                + str(num_of_members))
     good_role = get(ctx.guild.roles, name="Fortunate One")
@@ -324,14 +325,18 @@ async def rr(ctx):  # check role
                 count += 1
             except:
                 removal_failures += 1
-    if removal_failures != 0:
+        elif good_role not in roles:
+            need2read += 1
+    if need2read != 0:
+        print(f"{need2read} idiots left")
+        await ctx.send(f"{need2read} members with {bad_role} have not "
+                       "read the rules.", delete_after=15)
+    elif removal_failures != 0:
         await ctx.send(f"Successfully removed {bad_role} from {count} members.")
         await ctx.send(f"Couldn't remove the role from {removal_failures}"
                        " members.", delete_after=5)
-    if count == 0:
+    elif count == 0:
         print("No members that haven't accepted the rules.")
-        await ctx.send(f"The only remaining members with {bad_role} have not "
-                       "read the rules.", delete_after=15)
     else:
         await ctx.send(f"Successfully removed {bad_role} from {count} members.")
 # ------------------------------------------------------------------------------
