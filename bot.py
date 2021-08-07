@@ -314,9 +314,9 @@ async def rr(ctx):  # check role
     print(num_of_members)
     for member in ctx.guild.members:
         if "rules" in [y.name.lower() for y in ctx.message.author.roles]:
-            role = get(ctx.guild.roles, name='read the rules')
+            #role = get(ctx.guild.roles, name='read the rules')
             count += 1
-        print("The number of members with the role: " + str(count))
+    print("The number of members with the role: " + str(count))
     # await ctx.message.channel.send("Successfully removed 'READ THE RULES' "
     #                                "role from " + str(count) + " members.",
     #                                delete_after=5)
