@@ -314,10 +314,10 @@ async def rr(ctx):  # check role
     # await ctx.message.channel.send("Current number of members: "
     #                                + str(num_of_members))
     good_role = get(ctx.guild.roles, id=698039243565694989)
-    bad_role = get(ctx.guild.roles, id=735248360801435701)
+    bad_role = get(ctx.guild.roles, name="READ THE RULES")
 
     for member in ctx.guild.members:
-        if "READ THE RULES" in ctx.message.author.roles:
+        if bad_role in ctx.message.author.roles:
             count += 1
     await ctx.message.channel.send("The number of members with the role: "
                                    + str(count))
