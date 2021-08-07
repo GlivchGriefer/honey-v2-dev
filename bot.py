@@ -84,7 +84,7 @@ class KeepClean(commands.Cog):
 @bot.command()  # |•| Beautify embed
 async def sys(ctx, *, arg):
     """
-   [D]
+    [D]
     :param arg:
     :param ctx:
    """
@@ -302,11 +302,8 @@ async def ds(ctx, arg: int):
 @bot.command()
 async def rr(ctx):  # check role
     """
-    |!|
-        -where is the command added?
-        -add members with [Fortunate one + READ THE RULES] to list
-        -for testing, send list to chat in embed > success message after
-            each one?
+    [D]
+    :param ctx:
     """
     await discord.message.Message.delete(ctx.message)
     removal_failures = 0
@@ -322,7 +319,7 @@ async def rr(ctx):  # check role
                 await member.remove_roles(bad_role)
             except:
                 removal_failures += 1
-    if removal_failures is not 0:
+    if removal_failures != 0:
         await ctx.send(f"Couldn't remove the role from {removal_failures}"
                        " members.")
 
