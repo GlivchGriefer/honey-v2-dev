@@ -317,7 +317,7 @@ async def rr(ctx):  # check role
     bad_role = get(ctx.guild.roles, id=735248360801435701)
 
     for member in ctx.guild.members:
-        if bad_role in ctx.message.author.roles:
+        if "READ THE RULES" in ctx.message.author.roles:
             count += 1
     await ctx.message.channel.send("The number of members with the role: "
                                    + str(count))
