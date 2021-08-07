@@ -312,14 +312,14 @@ async def rr(ctx):  # check role
     await discord.message.Message.delete(ctx.message)
     num_of_members = ctx.guild.member_count
     count = 0
-    ctx.reply("Current number of members: " + str(num_of_members))
+    await ctx.reply("Current number of members: " + str(num_of_members))
     good_role = get(ctx.guild.roles, id=roles[0])
     bad_role = get(ctx.guild.roles, id=roles[1])
 
     for member in ctx.guild.members:
         if good_role and bad_role in ctx.message.author.roles:
             count += 1
-    ctx.reply("The number of members with the role: " + str(count))
+    await ctx.reply("The number of members with the role: " + str(count))
     # await ctx.message.channel.send("Successfully removed 'READ THE RULES' "
     #                                "role from " + str(count) + " members.",
     #                                delete_after=5)
