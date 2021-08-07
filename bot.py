@@ -309,13 +309,15 @@ async def rr(ctx):  # check role
     await discord.message.Message.delete(ctx.message)
     members = ctx.message.server.members
     count = 0
+    print(int(len(members)))
     for member in members:
-        if "rules" in [y.name.lower() for y in ctx.message.author.roles]:
-            role = get(ctx.message.server.roles, name='read the rules')
-            await ctx.remove_roles(member, role)
+        if "inferno" in [y.name.lower() for y in ctx.message.author.roles]:
+            role = get(ctx.message.server.roles, name='inferno squad')
             count += 1
-    await ctx.message.channel.send("Successfully removed 'READ THE RULES' "
-        "role from " + str(count) + " members.", delete_after=5)
+        print("The number of members with the role: " + str(count))
+    # await ctx.message.channel.send("Successfully removed 'READ THE RULES' "
+    #                                "role from " + str(count) + " members.",
+    #                                delete_after=5)
 # ------------------------------------------------------------------------------
 bot.add_cog(KeepClean(bot))
 bot.run(token)
