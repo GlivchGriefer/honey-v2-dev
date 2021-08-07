@@ -328,6 +328,10 @@ async def rr(ctx):  # check role
         await ctx.send(f"Successfully removed {bad_role} from {count} members.")
         await ctx.send(f"Couldn't remove the role from {removal_failures}"
                        " members.", delete_after=5)
+    if count == 0:
+        print("No members that haven't accepted the rules.")
+        await ctx.send(f"The only remaining members with {bad_role} have not "
+                       "read the rules.", delete_after=15)
     else:
         await ctx.send(f"Successfully removed {bad_role} from {count} members.")
 # ------------------------------------------------------------------------------
