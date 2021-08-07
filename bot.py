@@ -317,13 +317,11 @@ async def rr(ctx):  # check role
     bad_role = get(ctx.guild.roles, name="READ THE RULES")
 
     for member in ctx.guild.members:
-        if bad_role in ctx.message.author.roles:
-            count += 1
-    await ctx.message.channel.send("The number of members with the role: "
-                                   + str(count))
-    # await ctx.message.channel.send("Successfully removed 'READ THE RULES' "
-    #                                "role from " + str(count) + " members.",
-    #                                delete_after=5)
+        try:
+            await member.remove_roles(bad_role)
+        except:
+            print(f"Couldn't remove roles from {member}")
+    await ctx.send(f'Removed **all** experimental roles.', delete_after=5)
 # ------------------------------------------------------------------------------
 bot.add_cog(KeepClean(bot))
 bot.run(token)
