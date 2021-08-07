@@ -306,7 +306,10 @@ async def rr(ctx):  # check role
     :param ctx:
     """
     await discord.message.Message.delete(ctx.message)
+    await ctx.send("Please wait while I process your request...",
+                   delete_after=15)
     removal_failures = 0
+    count = 0
     # await ctx.message.channel.send("Current number of members: "
     #                                + str(num_of_members))
     good_role = get(ctx.guild.roles, name="Fortunate One")
@@ -317,12 +320,15 @@ async def rr(ctx):  # check role
         if bad_role and good_role in roles:
             try:
                 await member.remove_roles(bad_role)
+                count += 1
             except:
                 removal_failures += 1
     if removal_failures != 0:
+        await ctx.send(f"Successfully removed {bad_role} from {count} members.")
         await ctx.send(f"Couldn't remove the role from {removal_failures}"
-                       " members.")
-
+                       " members.", delete_after=5)
+    else:
+        await ctx.send(f"Successfully removed {bad_role} from {count} members.")
 # ------------------------------------------------------------------------------
 bot.add_cog(KeepClean(bot))
 bot.run(token)
