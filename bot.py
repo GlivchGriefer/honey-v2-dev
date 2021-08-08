@@ -345,9 +345,9 @@ async def rr(ctx):  # check role
 async def entry_role(ctx):
     channel = bot.get_channel(735249323226300508)
     msg = channel.get_message(760735687061929985)
-    
+
     def check(reaction, user):
-        return user == ctx.user and reaction.message == msg and str(
+        return user is ctx.user and reaction.message is msg and str(
             reaction.emoji) is 'sh'
 
     while True:
