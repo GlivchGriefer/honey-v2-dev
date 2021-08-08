@@ -341,34 +341,6 @@ async def rr(ctx):  # check role
         await ctx.send(f"Successfully removed {bad_role} from {count} members.")
 
 
-@bot.event
-async def entry_role(ctx):
-    channel = bot.get_channel(735249323226300508)
-    msg = channel.get_message(760735687061929985)
-
-    def check(reaction, user):
-        return user == ctx.user and reaction.message == msg and str(
-            reaction.emoji) == 'sh'
-
-    while True:
-        try:
-            reaction, user = await bot.wait_for("reaction_add", check=check)
-
-            if str(reaction.emoji) == 'sh':
-                a_role = discord.utils.get(ctx.guild.roles, name='Fortunate '
-                                                                 'One')
-                await user.add_roles(a_role)
-                d_role = discord.utils.get(ctx.guild.roles, name='READ THE '
-                                                                 'RULES')
-                await user.add_roles(d_role)
-                await ctx.send(f'Removed entry role and granted '
-                               f'{user} access '
-                               f'to '
-                               f'server.')
-        except:
-            await ctx.send("```cssError```")
-        finally:
-            await ctx.send("```cssProcess completed```")
 # ------------------------------------------------------------------------------
 bot.add_cog(KeepClean(bot))
 bot.run(token)
