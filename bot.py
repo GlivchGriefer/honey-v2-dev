@@ -232,8 +232,9 @@ async def a(ctx, *, arg):
             "\n\nRules:" \
             "\n[1] Must be subscribed to https://twitch.tv/speakerhoney" \
             "\n[2] Only submit works in progress by YOU not someone else. " \
-            "\nNOTHING THAT HAS ALREADY BEEN RELEASED"\
-            "This isn't share my EP time, it's meant to give feedback and productive guidance that can applied to" \
+            "\n**NOTHING THAT HAS ALREADY BEEN RELEASED**"\
+            "\n*This isn't share my EP time, it's meant to give feedback and " \
+            "productive guidance that can applied to*" \
             " tracks still in progress (please only link your new releases in #got-a-release-post-it-here )." \
             "\n[3] Only one track per artist each stream." \
             "\n[4] Finally, please be present when Speaker Honey is " \
