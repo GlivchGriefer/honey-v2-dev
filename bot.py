@@ -230,16 +230,18 @@ async def a(ctx, *, arg):
     em1_d = "**Please do not post anything but the submission command to this channel.**" \
             "\n\nSimply type -sys 'the link to your song'\nEx) -sys https://soundcloud.com/" \
             "\n\nRules:" \
-            "\n[1] Only submit works in progress, or remixes by YOU not someone else." \
-            "\n[2] No already released songs, only works in progress. " \
+            "\n[1] Must be subscribed to https://twitch.tv/speakerhoney" \
+            "\n[2] Only submit works in progress by YOU not someone else. " \
+            "\nNOTHING THAT HAS ALREADY BEEN RELEASED"\
             "This isn't share my EP time, it's meant to give feedback and productive guidance that can applied to" \
             " tracks still in progress (please only link your new releases in #got-a-release-post-it-here )." \
             "\n[3] Only one track per artist each stream." \
-            "\n[4] Finally, please be present when Speaker Honey is approaching your track during stream." \
-            "\n\nTune in Mondays at 7:30 PM PST" \
+            "\n[4] Finally, please be present when Speaker Honey is " \
+            "approaching your track during stream." \
+            "\n\nStream starts Mondays at 7:30 PM PST" \
             "\n\n*All messages in this channel " \
             "will be deleted immediately. You will know if your submission is successful.*" \
-            "\n**DO NOT SUBMIT MORE THAN ONCE PER WEEK**"
+            "\n**DO NOT SUBMIT MORE THAN ONCE PER STREAM**"
     em1 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0),
                         description=em1_d)
     # Initialize list of announcements [EMBEDS]
