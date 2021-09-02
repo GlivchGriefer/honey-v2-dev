@@ -228,14 +228,14 @@ async def a(ctx, *, arg):
 
     # sys rules
     em1_d = "**Please do not post anything but the submission command to this channel.**" \
-            "\n\nSimply type -sys 'the link to your song'\nEx) -sys https://soundcloud.com/" \
+            "\n\nSimply type **-sys** *'the link to your song'*\n***Ex) -sys https://soundcloud.com/***" \
             "\n\nRules:" \
             "\n[1] Must be subscribed to https://twitch.tv/speakerhoney" \
             "\n[2] Only submit works in progress by YOU not someone else. " \
             "\n**NOTHING THAT HAS ALREADY BEEN RELEASED**"\
             "\n*This isn't share my EP time, it's meant to give feedback and " \
-            "productive guidance that can applied to*" \
-            " tracks still in progress (please only link your new releases in #got-a-release-post-it-here )." \
+            "productive guidance that can be applied to" \
+            " tracks still in progress* (please only link your new releases in #got-a-release-post-it-here)." \
             "\n[3] Only one track per artist each stream." \
             "\n[4] Finally, please be present when Speaker Honey is " \
             "approaching your track during stream." \
