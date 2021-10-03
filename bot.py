@@ -74,7 +74,7 @@ async def on_ready():
                                 , message=msg)
 
 
-@bot.event()
+@bot.event
 async def on_reaction_add(reaction, user):
     if reaction.user == bot.user:
         return
@@ -83,11 +83,13 @@ async def on_reaction_add(reaction, user):
         await bot.add_roles(user, collaborator)
 
 
-@bot.event()
+@bot.event
 async def on_reaction_remove(reaction, user):
     if reaction.message == msg and reaction.emoji == collab:
         collaborator = discord.utils.get(bot.server.roles, name="Collaborator")
         await bot.remove_roles(user, collaborator)
+
+        
 # ------------------------------------------------------------------------------
 class KeepClean(commands.Cog):
     def __init__(self, bot):
