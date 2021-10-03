@@ -62,6 +62,14 @@ async def on_message(message):
     await bot.process_commands(message)
 
 
+@bot.event  # Reaction Role (Collab)
+async def on_ready():
+    channel = bot.get_channel('709967233421410334')
+    role = discord.utils.get(bot.server.roles, name="Collaborator")
+    message = await channel.fetch_message('894048673342816307')
+    while True:
+        reaction = await bot.wait_for_reaction(emoji="<:collab:894048770411618324>", message=message)
+        await bot.add_roles(reaction.message.author, role)
 # ------------------------------------------------------------------------------
 class KeepClean(commands.Cog):
     def __init__(self, bot):
