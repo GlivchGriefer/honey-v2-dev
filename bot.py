@@ -61,15 +61,33 @@ async def on_message(message):
         pass
     await bot.process_commands(message)
 
+msg = None
+collab = bot.get_emoji('894045982659072100')
+
 
 @bot.event  # Reaction Role (Collab)
 async def on_ready():
     channel = bot.get_channel('709967233421410334')
-    role = discord.utils.get(bot.server.roles, name="Collaborator")
-    message = await channel.fetch_message('894048673342816307')
-    while True:
-        reaction = await bot.wait_for_reaction(emoji="<:collab:894048770411618324>", message=message)
-        await bot.add_roles(reaction.message.author, role)
+    global msg
+    msg = await channel.fetch_message('894048673342816307')
+    await bot.wait_for_reaction(emoji="<:collab:894048770411618324>"
+                                , message=msg)
+
+
+@bot.event()
+async def on_reaction_add(reaction, user):
+    if reaction.user == bot.user:
+        return
+    if reaction.message == msg and reaction.emoji == collab:
+        collaborator = discord.utils.get(bot.server.roles, name="Collaborator")
+        await bot.add_roles(user, collaborator)
+
+
+@bot.event()
+async def on_reaction_remove(reaction, user):
+    if reaction.message == msg and reaction.emoji == collab:
+        collaborator = discord.utils.get(bot.server.roles, name="Collaborator")
+        await bot.remove_roles(user, collaborator)
 # ------------------------------------------------------------------------------
 class KeepClean(commands.Cog):
     def __init__(self, bot):
