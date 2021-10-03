@@ -332,7 +332,7 @@ async def rr(ctx):  # check role
             need2read += 1
     if need2read != 0:
         print(f"{need2read} idiots left")
-        await ctx.send(f"{need2read} members with {bad_role} have not "
+        await ctx.send(f"{need2read} have not "
                        "read the rules.")
     elif removal_failures != 0:
         await ctx.send(f"Successfully removed {bad_role} from {count} members.")
