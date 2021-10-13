@@ -329,49 +329,6 @@ async def ds(ctx, arg: int):
         if conn is not None:
             conn.close()
 
-
-@bot.command()
-async def rr(ctx):  # check role
-    """
-    [D]
-    :param ctx:
-    """
-    await discord.message.Message.delete(ctx.message)
-    print("Removing role from applicable members.")
-    await ctx.send("Please wait while I process your request...",
-                   delete_after=15)
-    removal_failures = 0
-    count = 0
-    need2read = 0
-    # await ctx.message.channel.send("Current number of members: "
-    #                                + str(num_of_members))
-    good_role = get(ctx.guild.roles, name="Fortunate One")
-    bad_role = get(ctx.guild.roles, name="READ THE RULES")
-
-    for member in ctx.guild.members:
-        roles = member.roles
-        if bad_role and good_role in roles:
-            try:
-                await member.remove_roles(bad_role)
-                count += 1
-            except:
-                removal_failures += 1
-        elif good_role not in roles:
-            need2read += 1
-    if need2read != 0:
-        print(f"{need2read} idiots left")
-        await ctx.send(f"{need2read} have not "
-                       "read the rules.")
-    elif removal_failures != 0:
-        await ctx.send(f"Successfully removed {bad_role} from {count} members.")
-        await ctx.send(f"Couldn't remove the role from {removal_failures}"
-                       " members.", delete_after=5)
-    elif count == 0:
-        print("No members that haven't accepted the rules.")
-    else:
-        await ctx.send(f"Successfully removed {bad_role} from {count} members.")
-
-
 # ------------------------------------------------------------------------------
 bot.add_cog(KeepClean(bot))
 bot.run(token)
