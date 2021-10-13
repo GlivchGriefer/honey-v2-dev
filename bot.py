@@ -61,6 +61,31 @@ async def on_message(message):
         pass
     await bot.process_commands(message)
 
+
+@bot.event
+async def on_reaction_add(reaction, user):
+    channel = reaction.message.channel
+    await bot.send_message(channel, '{} has added {} to the message: {'
+                                    '}'.format(user.name, reaction.emoji,
+                                               reaction.message.content))
+    # if reaction.user == bot.user:
+    #     return
+    # if reaction.message == msg and reaction.emoji == collab:
+    #     collaborator = discord.utils.get(bot.server.roles, name="Collaborator")
+    #     await bot.add_roles(user, collaborator)
+
+
+@bot.event
+async def on_reaction_remove(reaction, user):
+    channel = reaction.message.channel
+    await bot.send_message(channel, '{} has added {} to the message: {'
+                                    '}'.format(user.name, reaction.emoji,
+                                               reaction.message.content))
+    # if reaction.message == msg and reaction.emoji == collab:
+    #     collaborator = discord.utils.get(bot.server.roles, name="Collaborator")
+    #     await bot.remove_roles(user, collaborator)
+
+
 # ------------------------------------------------------------------------------
 class KeepClean(commands.Cog):
     def __init__(self, bot):
@@ -299,8 +324,8 @@ async def ds(ctx, arg: int):
                                  , delete_after=5)
         if conn is not None:
             conn.close()
-            
-            
+
+
 @bot.command()
 async def rr(ctx):  # check role
     """
