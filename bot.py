@@ -65,8 +65,7 @@ async def on_message(message):
 @bot.event
 async def on_reaction_add(reaction, user):
     channel = reaction.message.channel
-    message = reaction.message
-    await message.channel.send(channel, '{} has added {} to the message: {'
+    await channel.send(channel, '{} has added {} to the message: {'
                                     '}'.format(user.name, reaction.emoji,
                                                reaction.message.content))
     # if reaction.user == bot.user:
@@ -79,8 +78,7 @@ async def on_reaction_add(reaction, user):
 @bot.event
 async def on_reaction_remove(reaction, user):
     channel = reaction.message.channel
-    message = reaction.message
-    await message.channel.send(channel, '{} has added {} to the message: {'
+    await channel.send(channel, '{} has added {} to the message: {'
                                     '}'.format(user.name, reaction.emoji,
                                                reaction.message.content))
     # if reaction.message == msg and reaction.emoji == collab:
