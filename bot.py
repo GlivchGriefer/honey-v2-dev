@@ -69,10 +69,8 @@ async def on_reaction_add(reaction, user):
         return
     else:
         channel = reaction.message.channel
-        await channel.send('{} has added {} to the message: {}'
-                           .format(user.name, reaction.emoji,
-                                   reaction.message.content))
-        
+        await channel.send('success')
+
 
 @bot.event
 async def on_reaction_remove(reaction, user):
@@ -80,9 +78,7 @@ async def on_reaction_remove(reaction, user):
         return
     else:
         channel = reaction.message.channel
-        await channel.send('{} has added {} to the message: {}'
-                           .format(user.name, reaction.emoji,
-                                   reaction.message.content))
+        await channel.send('success')
 
     # collaborator = discord.utils.get(bot.server.roles, name="Collaborator")
     # await bot.remove_roles(user, collaborator)
