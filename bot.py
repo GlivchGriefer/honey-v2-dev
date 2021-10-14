@@ -65,21 +65,22 @@ async def on_message(message):
 
 @bot.event
 async def on_reaction_add(reaction, user):
-
-    if user == bot.user:
-        return
-    else:
-        channel = reaction.message.channel
-        await channel.send('success')
+    if reaction.message == '897994514772406362':
+        if reaction.emoji.name == ":collab:894048770411618324":
+            role = discord.utils.get(reaction.message.guild.roles,
+                                     name="Collaborator")
+            if role not in user.roles:
+                user.add_roles(role)
 
 
 @bot.event
 async def on_reaction_remove(reaction, user):
-    if user == bot.user:
-        return
-    else:
-        channel = reaction.message.channel
-        await channel.send('success')
+    if reaction.message == '897994514772406362':
+        if reaction.emoji.name == ":collab:894048770411618324":
+            role = discord.utils.get(reaction.message.guild.roles,
+                                     name="Collaborator")
+            if role not in user.roles:
+                user.remove_roles(role)
 
     # collaborator = discord.utils.get(bot.server.roles, name="Collaborator")
     # await bot.remove_roles(user, collaborator)
