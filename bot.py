@@ -66,7 +66,7 @@ async def on_message(message):
 @bot.event
 async def on_reaction_add(reaction, user):
     if reaction.message == '897994514772406362':
-        if reaction.emoji.name == ":collab:894048770411618324":
+        if reaction.emoji.name == ":collab:":
             role = discord.utils.get(reaction.message.guild.roles,
                                      name="Collaborator")
             if role not in user.roles:
@@ -76,7 +76,7 @@ async def on_reaction_add(reaction, user):
 @bot.event
 async def on_reaction_remove(reaction, user):
     if reaction.message == '897994514772406362':
-        if reaction.emoji.name == ":collab:894048770411618324":
+        if reaction.emoji.name == ":collab:":
             role = discord.utils.get(reaction.message.guild.roles,
                                      name="Collaborator")
             if role not in user.roles:
