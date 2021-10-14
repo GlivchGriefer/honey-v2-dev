@@ -18,6 +18,7 @@ oa2 = os.environ["CLIENT_SECRET"]
 status = 'TEST STATUS'
 intents = discord.Intents.default()
 intents.members = True
+intents.reactions = True
 bot = commands.Bot(command_prefix='-', intents=intents)
 
 
@@ -65,7 +66,7 @@ async def on_message(message):
 @bot.event
 async def on_reaction_add(reaction, user):
 
-    if reaction.user == bot.user:
+    if user == bot.user:
         return
     else:
         channel = reaction.message.channel
@@ -74,7 +75,7 @@ async def on_reaction_add(reaction, user):
 
 @bot.event
 async def on_reaction_remove(reaction, user):
-    if reaction.user == bot.user:
+    if user == bot.user:
         return
     else:
         channel = reaction.message.channel
@@ -354,8 +355,8 @@ async def rr(ctx):  # check role
             need2read += 1
     if need2read != 0:
         print(f"{need2read} idiots left")
-        await ctx.send(f"{need2read} have not "
-                       "read the rules.")
+        await ctx.send(f"{need2read} still need to do so... "
+                       f"<a:FeelsLagMan:698473891588472843>")
     elif removal_failures != 0:
         await ctx.send(f"Successfully removed {bad_role} from {count} members.")
         await ctx.send(f"Couldn't remove the role from {removal_failures}"
