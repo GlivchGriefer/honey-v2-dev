@@ -211,12 +211,12 @@ async def collab(ctx):
                 # create a new cursor
                 cur = conn.cursor()
                 # execute the INSERT statement
-                cur.execute(sql, (id, discord_id, username))
+                cur.execute(sql, (id, username))
                 # commit the changes to the database
                 conn.commit()
                 # close communication with the database
                 cur.close()
-                sl = list_submissions(sql2, ctx)
+                sl = list_submissions2(sql2, ctx)
 
                 await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
                 nos = len(sl)
