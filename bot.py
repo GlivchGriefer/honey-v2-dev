@@ -211,8 +211,6 @@ async def collab(ctx):
                 cur = conn.cursor()
                 # execute the INSERT statement
                 cur.execute(sql, username)
-                # get the generated id back
-                submission_id = cur.fetchone()[0]
                 # commit the changes to the database
                 conn.commit()
                 # close communication with the database
