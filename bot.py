@@ -195,7 +195,7 @@ async def collab(ctx):
 
     sql = """INSERT INTO collab(discord_id, username)
            VALUES(%s, %s) RETURNING id;"""
-    sql2 = """SELECT username FROM collab ORDER BY id"""
+    sql2 = """SELECT id, username FROM collab ORDER BY id"""
     conn = None
     id = None
 
@@ -210,7 +210,7 @@ async def collab(ctx):
                 # create a new cursor
                 cur = conn.cursor()
                 # execute the INSERT statement
-                cur.execute(sql, username)
+                cur.execute(sql, id, username)
                 # get the generated id back
                 submission_id = cur.fetchone()[0]
                 # commit the changes to the database
