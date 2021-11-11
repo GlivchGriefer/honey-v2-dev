@@ -189,10 +189,7 @@ async def collab(ctx):
     [D]
     :param ctx:
    """
-    discord_id = ctx.message.author.id
     username = ctx.message.author.display_name
-    embed_s = discord.Embed(color=discord.Color.green())
-
     sql = """INSERT INTO collab(username)
            VALUES(%s) RETURNING id;"""
     sql2 = """SELECT id, username FROM collab ORDER BY id"""
@@ -210,7 +207,7 @@ async def collab(ctx):
                 # create a new cursor
                 cur = conn.cursor()
                 # execute the INSERT statement
-                cur.execute(sql, (id, username))
+                cur.execute(sql, username)
                 # commit the changes to the database
                 conn.commit()
                 # close communication with the database
@@ -322,7 +319,7 @@ def list_submissions2(sql2, ctx):
             tl = str(_).split(',')
             o1 = '\n' + re.sub("[('[]", '', str(tl[0]))
             o2 = '\t' + re.sub("[\'\"]", '', str(tl[1]))
-            submissionlist.append(o1 + o2)
+            submissionlist.append(o1)
         return submissionlist
 
     except (Exception, psycopg2.DatabaseError) as error:
