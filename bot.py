@@ -189,7 +189,6 @@ async def collab(ctx):
     [D]
     :param ctx:
    """
-    await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
     discord_id = ctx.message.author.id
     username = ctx.message.author.display_name
     embed_s = discord.Embed(color=discord.Color.green())
@@ -199,7 +198,7 @@ async def collab(ctx):
     sql2 = """SELECT id, username FROM collab ORDER BY id"""
     conn = None
     id = None
-
+    await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
     if "fortunate one" or "admin" in [y.name.lower() for y in ctx.message.author.roles]:
         # ATTEMPT SUBMISSION
         try:
@@ -261,7 +260,6 @@ def list_submissions(sql2, ctx):
     :param sql2:
     :return:
     """
-    await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
     try:
         conn = psycopg2.connect(os.environ["DATABASE_URL"], sslmode='require')
         conn.autocommit = True
