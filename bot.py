@@ -194,7 +194,7 @@ async def collab(ctx):
     embed_s = discord.Embed(color=discord.Color.green())
 
     sql = """INSERT INTO collab(username)
-           VALUES(%s, %s) RETURNING id;"""
+           VALUES(%s) RETURNING id;"""
     sql2 = """SELECT id, username FROM collab ORDER BY id"""
     conn = None
     id = None
