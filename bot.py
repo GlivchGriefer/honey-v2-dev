@@ -322,7 +322,7 @@ def list_submissions2(sql2, ctx):
             tl = str(_).split(',')
             o1 = '\n' + re.sub("[('[]", '', str(tl[0]))
             o2 = '\t' + re.sub("[\'\"]", '', str(tl[1]))
-            submissionlist.append(o1, o2)
+            submissionlist.append(o1 + o2)
         return submissionlist
 
     except (Exception, psycopg2.DatabaseError) as error:
