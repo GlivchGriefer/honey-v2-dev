@@ -202,7 +202,7 @@ async def collab(ctx):
     if "fortunate one" or "admin" in [y.name.lower() for y in ctx.message.author.roles]:
         # ATTEMPT SUBMISSION
         try:
-            if str(ctx.channel) == "collab":
+            if str(ctx.channel) == "collab-challenge":
                 # connect to the PostgreSQL database
                 conn = psycopg2.connect(os.environ["DATABASE_URL"], sslmode='require')
                 # set auto commit to false
@@ -241,12 +241,11 @@ async def collab(ctx):
 
             else:
                 await ctx.channel.send("ONLY USE THAT COMMAND IN "
-                                       "share-your-song", delete_after=15)
+                                       "collab-challenge", delete_after=15)
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
-            print("\nThere was an error submitting to sys_monday!")
-            await ctx.message.channel.send("There was an error submitting to "
-                                           "Share Your Song Monday!"
+            print("\nThere was an error becoming a collaborator!")
+            await ctx.message.channel.send("There was an error becoming a collaborator!"
                                            + "\n***" + str(error) + "***"
                                            , delete_after=15)
         finally:
