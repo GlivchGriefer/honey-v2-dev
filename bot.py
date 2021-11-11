@@ -213,8 +213,6 @@ async def collab(ctx):
                 # close communication with the database
                 cur.close()
                 sl = list_submissions2(sql2, ctx)
-
-                await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
                 nos = len(sl)
                 if nos > 20:
                     await ctx.channel.purge(limit=2)  # IF THERE ARE TWO LISTS
@@ -317,8 +315,7 @@ def list_submissions2(sql2, ctx):
             one_submission.append(submission.split(','))
         for _ in one_submission:
             tl = str(_).split(',')
-            o1 = '\n' + re.sub("[('[]", '', str(tl[0]))
-            o2 = '\t' + re.sub("[\'\"]", '', str(tl[1]))
+            o1 = '\t' + re.sub("[\'\"]", '', str(tl[1]))
             submissionlist.append(o1)
         return submissionlist
 
