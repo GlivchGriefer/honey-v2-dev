@@ -189,6 +189,7 @@ async def collab(ctx):
     [D]
     :param ctx:
    """
+    await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
     discord_id = ctx.message.author.id
     username = ctx.message.author.display_name
     embed_s = discord.Embed(color=discord.Color.green())
@@ -260,6 +261,7 @@ def list_submissions(sql2, ctx):
     :param sql2:
     :return:
     """
+    await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
     try:
         conn = psycopg2.connect(os.environ["DATABASE_URL"], sslmode='require')
         conn.autocommit = True
