@@ -315,7 +315,7 @@ def list_submissions2(sql2, ctx):
             one_submission.append(submission.split(','))
         for _ in one_submission:
             tl = str(_).split(',')
-            o1 = '\t' + str(tl[0])
+            o1 = '\n' + re.sub("[\'\"]", '', str(tl[0]))
             submissionlist.append(o1)
         return submissionlist
 
