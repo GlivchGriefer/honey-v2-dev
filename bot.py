@@ -210,7 +210,7 @@ async def collab(ctx):
                 # create a new cursor
                 cur = conn.cursor()
                 # execute the INSERT statement
-                cur.execute(sql, (id, username))
+                cur.execute(sql, (id, discord_id, username))
                 # commit the changes to the database
                 conn.commit()
                 # close communication with the database
