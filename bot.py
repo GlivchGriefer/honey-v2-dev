@@ -107,7 +107,7 @@ class KeepClean(commands.Cog):
                 pass
 
 
-# ------------------------------------------------------------------------------
+# SYS SYS COMMAND --------------------------------------------------------------
 @bot.command()  # |•| Beautify embed
 async def sys(ctx, *, arg):
     """
@@ -182,6 +182,80 @@ async def sys(ctx, *, arg):
                 conn.close()
 
 
+# COLLAB PARTICIPATE -----------------------------------------------------------
+@bot.command()  # |•| Beautify embed
+async def collab(ctx):
+    """
+    [D]
+    :param ctx:
+   """
+    discord_id = ctx.message.author.id
+    username = ctx.message.author.display_name
+    embed_s = discord.Embed(color=discord.Color.green())
+
+    sql = """INSERT INTO collab(discord_id, username)
+           VALUES(%s, %s) RETURNING id;"""
+    sql2 = """SELECT username FROM collab ORDER BY id"""
+    conn = None
+    id = None
+
+    if "fortunate one" or "admin" in [y.name.lower() for y in ctx.message.author.roles]:
+        # ATTEMPT SUBMISSION
+        try:
+            if str(ctx.channel) == "collab":
+                # connect to the PostgreSQL database
+                conn = psycopg2.connect(os.environ["DATABASE_URL"], sslmode='require')
+                # set auto commit to false
+                conn.autocommit = True
+                # create a new cursor
+                cur = conn.cursor()
+                # execute the INSERT statement
+                cur.execute(sql, username)
+                # get the generated id back
+                submission_id = cur.fetchone()[0]
+                # commit the changes to the database
+                conn.commit()
+                # close communication with the database
+                cur.close()
+                sl = list_submissions(sql2, ctx)
+
+                await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
+                nos = len(sl)
+                if nos > 20:
+                    await ctx.channel.purge(limit=2)  # IF THERE ARE TWO LISTS
+                else:
+                    await ctx.channel.purge(limit=1)  # Delete ONE list
+
+                str1 = ''.join(sl[:19])
+                str2 = ''.join(sl[19:])
+                e1 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0),
+                                   description=str1, title="Current collaborators: " +
+                                                           str(len(sl)))
+                e2 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0),
+                                   description=str2)
+
+                # SEND MESSAGE(S)
+                await ctx.channel.send(embed=e1)
+                if len(str2) > 0:
+                    await ctx.channel.send(embed=e2)
+
+            else:
+                await ctx.channel.send("ONLY USE THAT COMMAND IN "
+                                       "share-your-song", delete_after=15)
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+            print("\nThere was an error submitting to sys_monday!")
+            await ctx.message.channel.send("There was an error submitting to "
+                                           "Share Your Song Monday!"
+                                           + "\n***" + str(error) + "***"
+                                           , delete_after=15)
+        finally:
+            print("\n-- #" + str(submission_id) + " SUCCESS " + str(ctx.message.
+                                                                    author))
+            if conn is not None:
+                conn.close()
+
+
 # list_submissions |!| beautify formatting
 def list_submissions(sql2, ctx):
     """
@@ -222,6 +296,45 @@ def list_submissions(sql2, ctx):
         print('list_submissions |SUCCESS|')
 
 
+# ------------------------------------------------------------------------------
+# list_submissions |!| beautify formatting
+def list_submissions2(sql2, ctx):
+    """
+    [D]
+    :param ctx:
+    :param sql2:
+    :return:
+    """
+    try:
+        conn = psycopg2.connect(os.environ["DATABASE_URL"], sslmode='require')
+        conn.autocommit = True
+        cur = conn.cursor()
+        cur.execute(sql2)
+
+        results = []
+        one_submission = []
+        submissionlist = []
+        for result in cur:
+            results.append(result)
+        cur.close()
+        for entity in results:
+            submission = str(entity)[str(entity).find('[') + 1:str(entity)
+                .find(']')]
+            print(submission)
+            one_submission.append(submission.split(','))
+        for _ in one_submission:
+            tl = str(_).split(',')
+            o1 = '\t' + re.sub("[\'\"]", '', str(tl[0]))
+            submissionlist.append(o1)
+        return submissionlist
+
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        # print("•mÖÐEQ©:←↓↓↑→→∟§&←↓∟UA-↓Ü~→○○○○")
+        print('list_submissions |SUCCESS|')
+
+# ------------------------------------------------------------------------------
 @bot.command()  # Show submissions (sys)
 async def show(ctx):
     await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
