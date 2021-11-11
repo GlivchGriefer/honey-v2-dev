@@ -195,7 +195,7 @@ async def collab(ctx):
 
     sql = """INSERT INTO collab(discord_id, username)
            VALUES(%s, %s) RETURNING id;"""
-    sql2 = """SELECT id, username FROM collab ORDER BY id"""
+    sql2 = """SELECT username FROM collab ORDER BY id"""
     conn = None
     id = None
     await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
@@ -210,7 +210,7 @@ async def collab(ctx):
                 # create a new cursor
                 cur = conn.cursor()
                 # execute the INSERT statement
-                cur.execute(sql, (id, username))
+                cur.execute(sql, username)
                 # commit the changes to the database
                 conn.commit()
                 # close communication with the database
@@ -320,9 +320,8 @@ def list_submissions2(sql2, ctx):
             one_submission.append(submission.split(','))
         for _ in one_submission:
             tl = str(_).split(',')
-            o1 = '\n' + re.sub("[('[]", '', str(tl[0]))
-            o2 = '\t' + re.sub("[\'\"]", '', str(tl[1]))
-            submissionlist.append(o1, o2)
+            o1 = '\t' + re.sub("[\'\"]", '', str(tl[0]))
+            submissionlist.append(o1)
         return submissionlist
 
     except (Exception, psycopg2.DatabaseError) as error:
