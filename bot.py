@@ -2,7 +2,7 @@
 import os
 import re
 from random import randrange
-
+from asyncio import sleep
 import discord
 import psycopg2
 from discord import guild, Guild, Message
@@ -192,9 +192,8 @@ async def collab(ctx):
     '908475301405798411'
     <:collab:894048770411618324>
    """
-    cache_msg = discord.utils.get(bot.messages, id='908475301405798411')
-    for reaction in cache_msg.reactions:
-        print(reaction)
+    cache_msg = discord.utils.get(bot.cached_messages, id='908475301405798411')
+    print(cache_msg.reactions)
 
 
 # list_submissions |!| beautify formatting
