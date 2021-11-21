@@ -188,63 +188,13 @@ async def collab(ctx):
     """
     [D]
     :param ctx:
+
+    '908475301405798411'
+    <:collab:894048770411618324>
    """
-    username = ctx.message.author.display_name
-    sql = """INSERT INTO collab(username)
-           VALUES(%s) RETURNING id;"""
-    sql2 = """SELECT id, username FROM collab ORDER BY id"""
-    conn = None
-    id = None
-    await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
-    if "fortunate one" or "admin" in [y.name.lower() for y in ctx.message.author.roles]:
-        # ATTEMPT SUBMISSION
-        try:
-            if str(ctx.channel) == "collab-challenge":
-                # connect to the PostgreSQL database
-                conn = psycopg2.connect(os.environ["DATABASE_URL"], sslmode='require')
-                # set auto commit to false
-                conn.autocommit = True
-                # create a new cursor
-                cur = conn.cursor()
-                # execute the INSERT statement
-                cur.execute(sql, username)
-                # commit the changes to the database
-                conn.commit()
-                # close communication with the database
-                cur.close()
-                sl = list_submissions2(sql2, ctx)
-                nos = len(sl)
-                if nos > 20:
-                    await ctx.channel.purge(limit=2)  # IF THERE ARE TWO LISTS
-                else:
-                    await ctx.channel.purge(limit=1)  # Delete ONE list
-
-                str1 = ''.join(sl[:19])
-                str2 = ''.join(sl[19:])
-                e1 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0),
-                                   description=str1, title="Current collaborators: " +
-                                                           str(len(sl)))
-                e2 = discord.Embed(color=discord.colour.Colour.from_rgb(112, 4, 0),
-                                   description=str2)
-
-                # SEND MESSAGE(S)
-                await ctx.channel.send(embed=e1)
-                if len(str2) > 0:
-                    await ctx.channel.send(embed=e2)
-
-            else:
-                await ctx.channel.send("ONLY USE THAT COMMAND IN "
-                                       "collab-challenge", delete_after=15)
-        except (Exception, psycopg2.DatabaseError) as error:
-            print(error)
-            print("\nThere was an error becoming a collaborator!")
-            await ctx.message.channel.send("There was an error becoming a collaborator!"
-                                           + "\n***" + str(error) + "***"
-                                           , delete_after=15)
-        finally:
-            print("\n-- SUCCESS " + str(ctx.message.author))
-            if conn is not None:
-                conn.close()
+    cache_msg = discord.utils.get(bot.messages, id='908475301405798411')
+    for reaction in cache_msg.reactions:
+        print(reaction)
 
 
 # list_submissions |!| beautify formatting
