@@ -189,12 +189,19 @@ async def collab(ctx):
     [D]
     :param ctx:
 
+    '698051419714093157'
     '908475301405798411'
     <:collab:894048770411618324>
    """
     await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
+    channel = Guild.fetch_channel('698051419714093157')
     cache_msg = discord.utils.get(bot.cached_messages, id='908475301405798411')
-    print(cache_msg.reactions)
+    for reactor in cache_msg.reactions:
+        reactors = await bot.get_reaction_users(reactor)
+
+    # from here you can do whatever you need with the member objects
+    for member in reactors:
+        print(member.name)
 
 
 # list_submissions |!| beautify formatting

@@ -1,5 +1,5 @@
 git+https://github.com/Rapptz/discord.py
-discord~=1.0.1
-pypresence~=4.0.0
-python-dotenv~=0.15.0
+discord==1.7.3
+pypresence==4.2.1
+python-dotenv==0.19.2
 psycopg2>=2.8.6
