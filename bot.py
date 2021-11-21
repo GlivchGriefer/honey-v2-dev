@@ -192,6 +192,7 @@ async def collab(ctx):
     '908475301405798411'
     <:collab:894048770411618324>
    """
+    await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
     cache_msg = discord.utils.get(bot.cached_messages, id='908475301405798411')
     print(cache_msg.reactions)
 
