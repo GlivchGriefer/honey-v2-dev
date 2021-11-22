@@ -222,7 +222,7 @@ async def collab(ctx):
     i = 1
     for key, value in pairs.items():
         await ctx.channel.send("Pair {}: {} and {}".format(i, key, value))
-#        i += 1
+        i += 1
 
 
 # list_submissions |!| beautify formatting
