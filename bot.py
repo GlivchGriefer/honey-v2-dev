@@ -1,6 +1,7 @@
 # IMPORTS
 import os
 import re
+import random
 from random import randrange
 from asyncio import sleep
 import discord
@@ -193,15 +194,40 @@ async def collab(ctx):
     '908475301405798411'
     <:collab:894048770411618324>
    """
-    await discord.message.Message.delete(ctx.message)  # DELETE CMD MSG
-    channel = await bot.fetch_channel('698051419714093157')
-    cache_msg = discord.utils.get(bot.cached_messages, id='908475301405798411')
-    for reactor in cache_msg.reactions:
-        reactors = await bot.get_reaction_users(reactor)
+    l = ["TheShadowMuffin", "Dara Ashrafi", "RxlLZ", "So Sus",
+         "Arkus", "Mobu", "Enter Name", "summoner", "FÜÜLROD",
+         "Ben York", "tuffghost", "basswaite", "Dieigo VLDZ",
+         "Inviting Disorder", "castronaut", "DISLOKATED",
+         "m4kina", "jamierileymusic", "Pinkowitz", "Stoobz_Moozik",
+         "HASTR", "ElezD"]
 
-    # from here you can do whatever you need with the member objects
-    for member in reactors:
-        print(member.name)
+    pairs = {}
+
+    while len(l) > 1:
+        # Using the randomly created indices, respective elements are popped out
+        r1 = random.randrange(0, len(l))
+        elem1 = l.pop(r1)
+
+        r2 = random.randrange(0, len(l))
+        elem2 = l.pop(r2)
+
+        # now the selected elements are paired in a dictionary
+        pairs[elem1] = elem2
+
+    # The variable 'pairs' is now a dictionary of this form:
+    # {'Sister': 'Aunt', 'Uncle': 'Father', 'Mother': 'Brother'}
+
+    # We can now print the elements of the dictionary in your desired format:
+    i = 1
+    string = None
+    for key, value in pairs.items():
+        string.append = ("Pair {}: {} and {}".format(i, key, value))
+        i += 1
+
+    embed = discord.Embed(color=discord.Color.random(),
+                          title='**Current Collaborators**',
+                          description=string)
+    await ctx.channel.send(embed=embed)
 
 
 # list_submissions |!| beautify formatting
