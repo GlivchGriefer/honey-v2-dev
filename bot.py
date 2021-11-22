@@ -219,14 +219,14 @@ async def collab(ctx):
 
     # We can now print the elements of the dictionary in your desired format:
     i = 1
-    string = None
+    pairs = []
     for key, value in pairs.items():
-        string.append = ("Pair {}: {} and {}".format(i, key, value))
+        pairs.append = ("Pair {}: {} and {}".format(i, key, value))
         i += 1
 
     embed = discord.Embed(color=discord.Color.random(),
                           title='**Current Collaborators**',
-                          description=string)
+                          description=pairs[0-11])
     await ctx.channel.send(embed=embed)
 
 
