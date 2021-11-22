@@ -194,6 +194,7 @@ async def collab(ctx):
     '908475301405798411'
     <:collab:894048770411618324>
    """
+    await discord.message.Message.delete(ctx.message)
     l = ["TheShadowMuffin", "Dara Ashrafi", "RxlLZ", "So Sus",
          "Arkus", "Mobu", "Enter Name", "summoner", "FÜÜLROD",
          "Ben York", "tuffghost", "basswaite", "Dieigo VLDZ",
@@ -219,14 +220,14 @@ async def collab(ctx):
 
     # We can now print the elements of the dictionary in your desired format:
     i = 1
-    pairs = []
+    pair = []
     for key, value in pairs.items():
-        pairs.append = ("Pair {}: {} and {}".format(i, key, value))
+        pair.append = ("Pair {}: {} and {}".format(i, key, value))
         i += 1
 
     embed = discord.Embed(color=discord.Color.random(),
                           title='**Current Collaborators**',)
-    embed.description=pairs
+    embed.description=pair
     await ctx.channel.send(embed=embed)
 
 
