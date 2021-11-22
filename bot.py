@@ -187,12 +187,12 @@ async def sys(ctx, *, arg):
 @bot.command()
 async def c(ctx):
     await discord.message.Message.delete(ctx.message)
-    list = ["TheShadowMuffin", "Dara Ashrafi", "RxlLZ", "So Sus",
+    list = ["Speakerhoney", "TheShadowMuffin", "Dara Ashrafi", "RxlLZ", "So Sus",
          "Arkus", "Mobu", "Enter Name", "summoner", "FÜÜLROD",
          "Ben York", "tuffghost", "basswaite", "Diego VLDZ",
          "Inviting Disorder", "castronaut", "DISLOKATED",
          "m4kina", "jamierileymusic", "Pinkowitz", "Stoobz_Moozik",
-         "HASTR", "ElezD"]
+         "HASTR", "ElezD", "Toshi"]
 
     c_emote = "<:collab:894048770411618324>"
     await ctx.channel.send(c_emote + "**Current Collaborators**" + c_emote)
