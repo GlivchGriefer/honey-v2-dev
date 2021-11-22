@@ -225,8 +225,8 @@ async def collab(ctx):
         i += 1
 
     embed = discord.Embed(color=discord.Color.random(),
-                          title='**Current Collaborators**',
-                          description=pairs[0-11])
+                          title='**Current Collaborators**',)
+    embed.description=pairs
     await ctx.channel.send(embed=embed)
 
 
