@@ -184,6 +184,22 @@ async def sys(ctx, *, arg):
 
 
 # COLLAB PARTICIPATE -----------------------------------------------------------
+@bot.command()
+async def c(ctx):
+    await discord.message.Message.delete(ctx.message)
+    list = ["TheShadowMuffin", "Dara Ashrafi", "RxlLZ", "So Sus",
+         "Arkus", "Mobu", "Enter Name", "summoner", "FÜÜLROD",
+         "Ben York", "tuffghost", "basswaite", "Diego VLDZ",
+         "Inviting Disorder", "castronaut", "DISLOKATED",
+         "m4kina", "jamierileymusic", "Pinkowitz", "Stoobz_Moozik",
+         "HASTR", "ElezD"]
+
+    c_emote = "<:collab:894048770411618324>"
+    await ctx.channel.send(c_emote + "**Current Collaborators**" + c_emote)
+    for elem in list:
+        await ctx.channel.send(elem)
+
+
 @bot.command()  # |•| Beautify embed
 async def collab(ctx):
     """
@@ -220,6 +236,8 @@ async def collab(ctx):
 
     # We can now print the elements of the dictionary in your desired format:
     i = 1
+    c_emote = "<:collab:894048770411618324>"
+    await ctx.channel.send(c_emote + "**Randomized Pairs**" + c_emote)
     for key, value in pairs.items():
         await ctx.channel.send("Pair {}: {} and {}".format(i, key, value))
         i += 1
