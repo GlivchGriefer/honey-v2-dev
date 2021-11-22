@@ -220,9 +220,9 @@ async def collab(ctx):
 
     # We can now print the elements of the dictionary in your desired format:
     i = 1
-    pair = []
+    pair = {}
     for key, value in pairs.items():
-        pair.append = ("Pair {}: {} and {}".format(i, key, value))
+        pair.append("Pair {}: {} and {}".format(i, key, value))
         i += 1
 
     embed = discord.Embed(color=discord.Color.random(),
