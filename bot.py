@@ -211,12 +211,12 @@ async def collab(ctx):
     <:collab:894048770411618324>
    """
     await discord.message.Message.delete(ctx.message)
-    l = ["TheShadowMuffin", "Dara Ashrafi", "RxlLZ", "So Sus",
+    l = ["Speakerhoney", "TheShadowMuffin", "Dara Ashrafi", "RxlLZ", "So Sus",
          "Arkus", "Mobu", "Enter Name", "summoner", "FÜÜLROD",
          "Ben York", "tuffghost", "basswaite", "Diego VLDZ",
          "Inviting Disorder", "castronaut", "DISLOKATED",
          "m4kina", "jamierileymusic", "Pinkowitz", "Stoobz_Moozik",
-         "HASTR", "ElezD"]
+         "HASTR", "ElezD", "Toshi"]
 
     pairs = {}
 
