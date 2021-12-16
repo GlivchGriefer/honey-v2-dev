@@ -39,7 +39,7 @@ async def on_ready():
     bot.remove_command('help')
 
     await bot.change_presence(activity=discord.Activity(
-        type=discord.ActivityType.listening, name="I Can Do It EP"))
+        type=discord.ActivityType.listening, name="Phantom Flame"))
 
 
 # ADMIN COMMANDS / EVENTS ------------------------------------------------------
