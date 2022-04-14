@@ -39,7 +39,7 @@ async def on_ready():
     bot.remove_command('help')
 
     await bot.change_presence(activity=discord.Activity(
-        type=discord.ActivityType.listening, name="LFG .019"))
+        type=discord.ActivityType.listening, name="LFG .020 SPECIAL EDITION"))
 
 
 # ADMIN COMMANDS / EVENTS ------------------------------------------------------
