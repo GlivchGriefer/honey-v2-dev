@@ -474,5 +474,5 @@ async def rr(ctx):  # check role
 
 
 # ------------------------------------------------------------------------------
-bot.add_cog(KeepClean(bot))
+await bot.add_cog(KeepClean(bot))
 bot.run(token)
