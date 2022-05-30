@@ -37,7 +37,7 @@ async def on_ready():
     print('\n••• All events and commands loaded •••')
     print('\n••• All systems nominal....\n\n')
     bot.remove_command('help')
-
+    await bot.add_cog(KeepClean(bot))
     await bot.change_presence(activity=discord.Activity(
         type=discord.ActivityType.listening, name="LFG .021"))
 
@@ -474,5 +474,5 @@ async def rr(ctx):  # check role
 
 
 # ------------------------------------------------------------------------------
-bot.add_cog(await KeepClean(bot))
+
 bot.run(token)
