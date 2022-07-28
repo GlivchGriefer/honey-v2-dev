@@ -39,7 +39,7 @@ async def on_ready():
     bot.remove_command('help')
     await bot.add_cog(KeepClean(bot))
     await bot.change_presence(activity=discord.Activity(
-        type=discord.ActivityType.listening, name="LFG .021"))
+        type=discord.ActivityType.listening, name="ALL NIGHT @ 6PDT"))
 
 
 # ADMIN COMMANDS / EVENTS ------------------------------------------------------
