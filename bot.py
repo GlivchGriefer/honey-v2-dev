@@ -10,6 +10,15 @@ from discord import guild, Guild, Message
 from discord.utils import get
 from dotenv import load_dotenv
 from discord.ext import commands
+import urllib.request
+from html_table_parser.parser import HTMLTableParser
+import datetime
+from texttable import Texttable
+
+URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-' \
+      '1vSMKmlrvBlo_xuCv1wfZXdNLyRg3vpV0FW_Lz6DxsmgBmmw' \
+      'S8IxDQSiEV-tOqKnfwtp-KOyuwjDYW49/pubhtml?gid=2130' \
+      '170946&single=true&widget=false&headers=false&chrome=false'
 
 # VARIABLES
 load_dotenv()
@@ -471,6 +480,106 @@ async def rr(ctx):  # check role
     else:
         await ctx.send(f"Successfully removed {bad_role} from {count} members.")
 
+
+def url_get_contents(url):
+
+    # Opens a website and read its
+    # binary contents (HTTP Response Body)
+    # Making request to the website
+    req = urllib.request.Request(url=url)
+    f = urllib.request.urlopen(req)
+
+    # Reading contents of the website
+    return f.read()
+
+
+def print_header(header):
+    update = header[0][2]
+    date = update.split('UPDATED ', 1)[1]
+    now = datetime.date.today()
+    date = datetime.datetime.strptime(date, '%m/%d/%y').date()
+    difference = now - date
+    difference = "%d" % difference.days
+    if int(difference) >= 7:
+        desc = "**LAST UPDATE:" + difference + " DAYS AGO**"
+    else:
+        desc = "*LAST UPDATE:" + difference + " DAYS AGO*"
+    return desc
+
+
+def parse_info(info):
+    desc = []*3
+    t = Texttable()
+    # t.add_row(['\tLens', '   Price', '   Location'])
+    desc.append(['Lens', '   Price', '   Location'])
+    for row in info:
+        info_row = row[2]
+        if 'MM' in info_row:
+            if 'BODY' in info_row:
+                continue
+            elif 'REMOTE' in info_row:
+                continue
+            elif 'CNVRTR' in info_row:
+                continue
+            elif 'CONVERTER' in info_row:
+                continue
+            elif 'ADAPTER' in info_row:
+                continue
+            else:
+                if 'CANON' in row[2]:
+                    desc = row[2]
+                    price = row[3]
+                    location = row[4]
+                    desc = desc.split("CANON", 1)[1]
+                    # t.add_row([desc, price, location])
+                    desc.append([desc, price, location])
+
+                    # print(info)
+                    # if len(desc) <= 12:
+                    #     print(desc, '\t\t\t\t', price, '\t', location)
+                    # elif len(desc) > 12:
+                    #     if len(desc) <= 15:
+                    #         print(desc, '\t', price, '\t', location)
+                    #     else:
+                    #         print(desc, '\t', price, '\t', location)
+
+                else:
+                    continue
+        else:
+            continue
+    # print(t.draw())
+    description = ''.join(desc)
+    return description
+
+
+@bot.command()
+async def lenses(ctx):
+    await discord.message.Message.delete(ctx.message)
+    print("Retrieving used equipment listing from Mike's Camera")
+    await ctx.send("Please wait while I process your request...",
+                   delete_after=10)
+    # defining the html contents of a URL.
+    xhtml = url_get_contents(URL).decode('utf-8')
+
+    # Defining the HTMLTableParser object
+    p = HTMLTableParser()
+
+    # feeding the html contents in the
+    # HTMLTableParser object
+    p.feed(xhtml)
+
+    # Now finally obtaining the data of
+    # the table required
+    # pprint(p.tables[0])
+    # print(pd.DataFrame(p.tables[0]))
+    # Row containing update date / table headers    # print(p.tables[0][1])
+    header = [p.tables[0][1]]
+    info = p.tables[0]
+    embed = discord.Embed(color=discord.colour.Colour.from_rgb(4, 0, 139),
+                          description=parse_info(info), title=print_header(
+            header))
+    # print_header(header)
+    await ctx.message.channel.send(embed=embed)
 
 # ------------------------------------------------------------------------------
 
