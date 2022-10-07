@@ -3,4 +3,5 @@ discord==1.7.3
 pypresence==4.2.1
 python-dotenv==0.19.2
 psycopg2>=2.8.6
+html_table_parser>=0.1.0
 texttable~=1.6.4
